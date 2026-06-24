@@ -1,432 +1,316 @@
-* {
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DeepUnfolding Agent: a strategy-agnostic deep-unfolded adaptive controller API for classical, quantum, and hybrid optimisation systems." />
+  <title>DeepUnfolding Agent</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-:root {
-  --bg: #ffffff;
-  --bg-muted: #f8fafc;
-  --text: #0f172a;
-  --text-muted: #475569;
-  --border: #e2e8f0;
-  --primary: #4f46e5;
-  --terminal: #020617;
-  --terminal-soft: #111827;
-  --card-shadow: 0 16px 45px rgba(15, 23, 42, 0.08);
-}
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="DeepUnfolding Agent home">
+        <span class="brand-mark">DU</span>
+        <span>DeepUnfolding Agent</span>
+      </a>
 
-html {
-  scroll-behavior: smooth;
-}
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#overview">Overview</a>
+        <a href="#modes">Modes</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#api">API</a>
+        <a href="#quickstart">Quickstart</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
 
-body {
-  margin: 0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  line-height: 1.65;
-}
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Strategy-Agnostic Adaptive Controller API</p>
 
-.container {
-  width: min(1120px, calc(100% - 40px));
-  margin: 0 auto;
-}
+          <h1>Deep-Unfolded Control for Classical, Quantum, and Hybrid Optimisation</h1>
 
-.site-header {
-  background: rgba(11, 16, 32, 0.94);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
+          <p class="hero-description">
+            DeepUnfolding Agent is a FastAPI-based controller framework that receives
+            runtime diagnostics from an external optimisation system and returns
+            bounded strategy-level control variables. The framework supports
+            classical learning, quantum learning, and hybrid classical-quantum
+            optimisation through a common schema-driven interface.
+          </p>
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 18px;
-  padding-bottom: 18px;
-}
+          <div class="hero-buttons" aria-label="Project links">
+            <a class="pill pill-primary pill-disabled" href="#" aria-disabled="true" onclick="return false;">
+              Paper coming soon <span aria-hidden="true">📄</span>
+            </a>
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
+            <a class="pill pill-secondary" href="https://github.com/shanikairoshi/DeepUnfolding-Agent" target="_blank" rel="noopener">
+              GitHub <span aria-hidden="true">⭐</span>
+            </a>
 
-.brand-mark {
-  display: inline-flex;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
-  background: var(--primary);
-  color: #ffffff;
-  font-size: 0.9rem;
-  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
-}
+            <a class="pill pill-secondary pill-disabled" href="#" aria-disabled="true" onclick="return false;">
+              Dataset coming soon <span aria-hidden="true">🤗</span>
+            </a>
+          </div>
+        </div>
 
-.nav-links {
-  display: flex;
-  gap: 22px;
-  align-items: center;
-}
+        <div class="hero-terminal" aria-label="API quickstart preview">
+          <div class="terminal-bar"><span></span><span></span><span></span></div>
+<pre><code>uvicorn app.main:app --reload
 
-.nav-links a {
-  color: #cbd5e1;
-  text-decoration: none;
-  font-size: 0.95rem;
-}
+GET  /health
+GET  /strategies
+POST /strategies/register
+POST /controllers/create
+POST /controllers/{id}/suggest-controls
+POST /controllers/{id}/update-controller</code></pre>
+        </div>
+      </div>
+    </section>
 
-.nav-links a:hover {
-  color: #ffffff;
-}
+    <section id="overview" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Core Idea</p>
+          <h2>Adapt the strategy, not only the model optimiser</h2>
+        </div>
 
-.hero {
-  background:
-    radial-gradient(circle at top left, rgba(79, 70, 229, 0.35), transparent 34%),
-    radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.2), transparent 30%),
-    linear-gradient(135deg, #0b1020 0%, #111827 50%, #1e1b4b 100%);
-  color: #ffffff;
-  padding: 92px 0;
-}
+        <p class="lead">
+          Existing adaptive optimisers usually modify parameter updates inside a
+          model optimiser. DeepUnfolding Agent instead operates at the strategy
+          level. It observes diagnostics from an external system and returns
+          control variables that can shape the next optimisation round.
+        </p>
 
-.hero-layout {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 48px;
-  align-items: center;
-}
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>External API Boundary</h3>
+            <p>
+              Training systems remain independent. They send diagnostics to the
+              controller service and receive bounded control suggestions through
+              a stable HTTP interface.
+            </p>
+          </article>
 
-.eyebrow {
-  margin: 0 0 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: #a5b4fc;
-  font-size: 0.78rem;
-  font-weight: 800;
-}
+          <article class="feature-card">
+            <h3>Schema-Driven Control</h3>
+            <p>
+              Each strategy defines ordered state variables and bounded control
+              variables. This allows user-defined strategies to be registered
+              without rewriting the controller API.
+            </p>
+          </article>
 
-.hero-copy h1 {
-  font-size: clamp(2.5rem, 5vw, 4.8rem);
-  line-height: 1.02;
-  letter-spacing: -0.055em;
-  margin: 14px 0 22px;
-}
+          <article class="feature-card">
+            <h3>Deep-Unfolded Backend</h3>
+            <p>
+              Learnable multi-step controller logic adapts strategy-level variables
+              across repeated optimisation rounds using feedback from the external
+              execution loop.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-.hero-description {
-  font-size: 1.1rem;
-  color: #cbd5e1;
-  max-width: 760px;
-  margin: 0;
-}
+    <section id="modes" class="section section-muted">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Controller Families</p>
+          <h2>One interface for multiple optimisation settings</h2>
+        </div>
 
-.hero-buttons {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 34px;
-}
+        <div class="mode-grid">
+          <article class="mode-card">
+            <div class="mode-icon">C</div>
+            <h3>Classical</h3>
+            <p>
+              Controls learning rate, proximal strength, local epochs, and other
+              strategy-level variables in classical and federated learning systems.
+            </p>
+          </article>
 
-.pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 46px;
-  padding: 12px 18px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 800;
-  border: 1px solid transparent;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-}
+          <article class="mode-card">
+            <div class="mode-icon">Q</div>
+            <h3>Quantum</h3>
+            <p>
+              Controls quantum parameter learning rate, shot count, circuit depth,
+              entanglement depth, and measurement reuse.
+            </p>
+          </article>
 
-.pill:hover {
-  transform: translateY(-2px);
-}
+          <article class="mode-card">
+            <div class="mode-icon">H</div>
+            <h3>Hybrid</h3>
+            <p>
+              Coordinates classical and quantum controls through a shared
+              schema-driven controller interface.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-.pill-primary {
-  background: #ffffff;
-  color: #1e1b4b;
-  box-shadow: 0 14px 35px rgba(255, 255, 255, 0.12);
-}
+    <section id="workflow" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Execution Flow</p>
+          <h2>Diagnostics in, bounded controls out</h2>
+        </div>
 
-.pill-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.22);
-}
+        <div class="workflow-strip">
+          <div class="workflow-step">
+            <span>01</span>
+            <h3>Diagnostics</h3>
+            <p>
+              External systems send runtime signals such as loss, gradient norm,
+              update norm, shot noise, circuit depth, and round index.
+            </p>
+          </div>
 
-.pill-secondary:hover {
-  background: rgba(255, 255, 255, 0.14);
-}
+          <div class="workflow-step">
+            <span>02</span>
+            <h3>Controller State</h3>
+            <p>
+              The schema adapter converts diagnostics into an ordered state vector
+              defined by the registered strategy schema.
+            </p>
+          </div>
 
-.pill-disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-  pointer-events: none;
-}
+          <div class="workflow-step">
+            <span>03</span>
+            <h3>Control Prediction</h3>
+            <p>
+              The controller backend predicts bounded control variables for the
+              next optimisation round.
+            </p>
+          </div>
 
-.hero-terminal,
-.code-panel,
-.architecture-panel {
-  background: var(--terminal);
-  border: 1px solid rgba(148, 163, 184, 0.28);
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
-}
+          <div class="workflow-step">
+            <span>04</span>
+            <h3>Feedback Update</h3>
+            <p>
+              The external system applies controls, returns feedback, and the
+              controller updates its internal parameters and logs the experiment.
+            </p>
+          </div>
+        </div>
 
-.terminal-bar {
-  display: flex;
-  gap: 8px;
-  padding: 16px;
-  background: var(--terminal-soft);
-}
+        <div class="architecture-panel">
+<pre><code>External Training System
+        ↓ diagnostics
+FastAPI Controller Service
+        ↓
+Strategy Registry / Schema Adapter
+        ↓
+Controller Factory
+        ↓
+Classical / Quantum / Hybrid Controller Backend
+        ↓ bounded controls
+External Training System Applies Controls
+        ↓ feedback
+Controller Update / Experiment Logger / Storage</code></pre>
+        </div>
+      </div>
+    </section>
 
-.terminal-bar span {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #64748b;
-}
+    <section id="api" class="section section-muted">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Public Interface</p>
+          <h2>API endpoints</h2>
+        </div>
 
-pre {
-  margin: 0;
-  overflow-x: auto;
-}
+        <div class="endpoint-grid">
+          <article class="endpoint-card"><span class="method method-get">GET</span><code>/health</code><p>Check whether the controller service is running.</p></article>
+          <article class="endpoint-card"><span class="method method-get">GET</span><code>/strategies</code><p>List built-in and user-registered strategy schemas.</p></article>
+          <article class="endpoint-card"><span class="method method-post">POST</span><code>/strategies/register</code><p>Register a user-defined optimisation strategy schema.</p></article>
+          <article class="endpoint-card"><span class="method method-post">POST</span><code>/controllers/create</code><p>Create a controller instance for a selected strategy.</p></article>
+          <article class="endpoint-card"><span class="method method-post">POST</span><code>/controllers/{id}/suggest-controls</code><p>Return bounded controls from the latest diagnostics.</p></article>
+          <article class="endpoint-card"><span class="method method-post">POST</span><code>/controllers/{id}/update-controller</code><p>Update the controller using feedback from the external round.</p></article>
+          <article class="endpoint-card"><span class="method method-post">POST</span><code>/quantum/run-controlled-round</code><p>Execute a controlled quantum round using registered controls.</p></article>
+          <article class="endpoint-card"><span class="method method-get">GET</span><code>/experiments/{run_id}</code><p>Retrieve logged experiment outputs and metadata.</p></article>
+        </div>
+      </div>
+    </section>
 
-code {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-}
+    <section id="quickstart" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Quickstart</p>
+          <h2>Run locally and open Swagger UI</h2>
+        </div>
 
-.hero-terminal pre,
-.code-panel pre,
-.architecture-panel pre {
-  padding: 24px;
-  color: #dbeafe;
-  font-size: 0.92rem;
-}
+        <div class="quickstart-grid">
+          <div class="quickstart-copy">
+            <p>
+              Start the FastAPI service locally, then use Swagger UI to create a
+              controller, submit diagnostics, request controls, and update the
+              controller after each external optimisation round.
+            </p>
 
-.section {
-  padding: 86px 0;
-}
+            <a class="text-link" href="https://github.com/shanikairoshi/DeepUnfolding-Agent" target="_blank" rel="noopener">
+              View source code on GitHub →
+            </a>
+          </div>
 
-.section-muted {
-  background: var(--bg-muted);
-}
+          <div class="code-panel">
+<pre><code># Start the API
+uvicorn app.main:app --reload
 
-.section-heading {
-  max-width: 790px;
-  margin-bottom: 28px;
-}
+# Open Swagger UI
+http://127.0.0.1:8000/docs
 
-.section-heading h2 {
-  font-size: clamp(2rem, 3.2vw, 3.1rem);
-  line-height: 1.08;
-  letter-spacing: -0.04em;
-  margin: 0;
-}
+# Docker
+docker build -t deepunfolding-agent-api:0.1.0 .
+docker run -p 8000:8000 deepunfolding-agent-api:0.1.0</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
 
-.lead {
-  color: var(--text-muted);
-  font-size: 1.08rem;
-  max-width: 920px;
-  margin: 0 0 34px;
-}
+    <section id="dataset" class="section section-muted">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Resources</p>
+          <h2>Dataset and benchmark resources</h2>
+        </div>
 
-.feature-grid,
-.mode-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
+        <p class="lead">
+          Public dataset links and benchmark configuration files will be released
+          after final validation. The current implementation supports user-provided
+          datasets through schema-based adapters and external benchmark scripts.
+        </p>
+      </div>
+    </section>
 
-.feature-card,
-.mode-card,
-.endpoint-card,
-.workflow-step {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 26px;
-  box-shadow: var(--card-shadow);
-}
+    <section id="citation" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Citation</p>
+          <h2>Paper citation coming soon</h2>
+        </div>
 
-.feature-card h3,
-.mode-card h3,
-.workflow-step h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  letter-spacing: -0.02em;
-}
+        <div class="code-panel">
+<pre><code>@article{nanayakkara2026deepunfoldingagent,
+  title  = {DeepUnfolding Agent: A Strategy-Agnostic API Framework for Adaptive Classical, Quantum, and Hybrid Optimisation},
+  author = {Nanayakkara, Shanika Iroshi},
+  year   = {2026}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
 
-.feature-card p,
-.mode-card p,
-.endpoint-card p,
-.workflow-step p {
-  color: var(--text-muted);
-  margin-bottom: 0;
-}
-
-.mode-icon {
-  display: inline-flex;
-  width: 48px;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px;
-  background: #eef2ff;
-  color: var(--primary);
-  font-weight: 900;
-  margin-bottom: 16px;
-}
-
-.workflow-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-  margin-bottom: 28px;
-}
-
-.workflow-step span {
-  display: inline-flex;
-  width: 42px;
-  height: 42px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  background: #eef2ff;
-  color: var(--primary);
-  font-weight: 900;
-  margin-bottom: 16px;
-}
-
-.endpoint-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-}
-
-.endpoint-card code {
-  display: block;
-  margin: 14px 0 10px;
-  font-size: 0.96rem;
-  color: #1e293b;
-  word-break: break-word;
-}
-
-.method {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  border-radius: 999px;
-  padding: 0 10px;
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-}
-
-.method-get {
-  background: #ecfeff;
-  color: #0e7490;
-}
-
-.method-post {
-  background: #eef2ff;
-  color: #4338ca;
-}
-
-.quickstart-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 28px;
-  align-items: start;
-}
-
-.quickstart-copy p {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  margin-top: 0;
-}
-
-.text-link {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 800;
-}
-
-.text-link:hover {
-  text-decoration: underline;
-}
-
-.site-footer {
-  background: #0b1020;
-  color: #cbd5e1;
-  padding: 34px 0;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.footer-content p {
-  margin: 0;
-}
-
-@media (max-width: 980px) {
-  .hero-layout,
-  .feature-grid,
-  .mode-grid,
-  .workflow-strip,
-  .endpoint-grid,
-  .quickstart-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding: 72px 0;
-  }
-
-  .nav {
-    align-items: flex-start;
-    gap: 16px;
-    flex-direction: column;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-}
-
-@media (max-width: 560px) {
-  .container {
-    width: min(100% - 28px, 1120px);
-  }
-
-  .hero-copy h1 {
-    font-size: 2.25rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-  }
-
-  .pill {
-    width: 100%;
-  }
-
-  .section {
-    padding: 64px 0;
-  }
-}
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© 2026 DeepUnfolding Agent Project</p>
+      <p>Strategy-agnostic adaptive control for classical, quantum, and hybrid optimisation.</p>
+    </div>
+  </footer>
+</body>
+</html>
