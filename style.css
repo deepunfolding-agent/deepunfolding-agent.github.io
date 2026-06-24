@@ -172,6 +172,10 @@ h1 {
 .pill:hover {
   transform: translateY(-3px);
 }
+.pill-disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
 
 .hero-card {
   position: relative;
