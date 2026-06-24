@@ -1,259 +1,432 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DeepUnfolding Agent: a strategy-agnostic deep-unfolded adaptive controller API for classical, quantum, and hybrid optimisation." />
-  <meta name="author" content="Shanika Iroshi Nanayakkara" />
-  <title>DeepUnfolding Agent</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="style.css" />
-</head>
+* {
+  box-sizing: border-box;
+}
 
-<body>
-  <nav class="top-nav" aria-label="Main navigation">
-    <a class="brand" href="#top" aria-label="DeepUnfolding Agent home">
-      <img src="assets/logo.svg" alt="DeepUnfolding Agent logo" />
-      <span>DeepUnfolding Agent</span>
-    </a>
-    <div class="nav-links">
-      <a href="#abstract">Abstract</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#api">API</a>
-      <a href="#usage">Usage</a>
-      <a href="#citation">Citation</a>
-    </div>
-  </nav>
+:root {
+  --bg: #ffffff;
+  --bg-muted: #f8fafc;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --border: #e2e8f0;
+  --primary: #4f46e5;
+  --terminal: #020617;
+  --terminal-soft: #111827;
+  --card-shadow: 0 16px 45px rgba(15, 23, 42, 0.08);
+}
 
-  <header id="top" class="hero">
-    <div class="hero-bg"></div>
-    <div class="container hero-grid">
-      <section class="hero-copy">
-        <p class="eyebrow">Strategy-Agnostic Adaptive Control</p>
-        <h1>DeepUnfolding Agent</h1>
-        <p class="subtitle">
-          A deep-unfolding agent API for adaptive classical, quantum, and hybrid optimisation systems.
-        </p>
-        
+html {
+  scroll-behavior: smooth;
+}
 
-       
-<div class="hero-buttons" aria-label="Project links">
-  <a class="pill pill-primary pill-disabled" href="#" aria-disabled="true" onclick="return false;">
-    Paper coming soon <span aria-hidden="true">📄</span>
-  </a>
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+}
 
-  <a class="pill pill-secondary" href="https://github.com/shanikairoshi/DeepUnfolding-Agent" target="_blank" rel="noopener">
-    GitHub <span aria-hidden="true">⭐</span>
-  </a>
+.container {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
 
-  <a class="pill pill-secondary pill-disabled" href="#" aria-disabled="true" onclick="return false;">
-    Dataset coming soon <span aria-hidden="true">🤗</span>
-  </a>
-</div>
+.site-header {
+  background: rgba(11, 16, 32, 0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 
-      </section>
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
 
-      <aside class="hero-card" aria-label="Project summary">
-        <div class="card-line"></div>
-        <h2>Controller Boundary</h2>
-        <p>
-          Diagnostics enter the API, the strategy schema defines the state and control spaces,
-          and bounded controls are returned to the external training system.
-        </p>
-        <div class="mini-flow">
-          <span>Diagnostics</span>
-          <span>→</span>
-          <span>Controller</span>
-          <span>→</span>
-          <span>Controls</span>
-        </div>
-      </aside>
-    </div>
-  </header>
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
 
-  <main>
-    <section class="container metric-row" aria-label="Project highlights">
-      <article>
-        <strong>Classical</strong>
-        <span>learning rate, proximal strength, local epochs</span>
-      </article>
-      <article>
-        <strong>Quantum</strong>
-        <span>shots, circuit depth, entanglement depth</span>
-      </article>
-      <article>
-        <strong>Hybrid</strong>
-        <span>joint classical–quantum control variables</span>
-      </article>
-      <article>
-        <strong>API-First</strong>
-        <span>FastAPI, Swagger, Docker-ready deployment</span>
-      </article>
-    </section>
+.brand-mark {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+}
 
-    <section id="news" class="container section">
-      <h2>Latest News</h2>
-      <ul class="news-list">
-        <li><time datetime="2026-06">June 2026</time> DeepUnfolding Agent prepared as a public API-based adaptive controller framework.</li>
-        <li><time datetime="2026-06">June 2026</time> Classical, quantum, and hybrid controller pathways integrated under a common schema interface.</li>
-        <li><time datetime="2026-06">June 2026</time> GitHub Pages project website released.</li>
-      </ul>
-    </section>
+.nav-links {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
 
-    <section id="abstract" class="container section two-column">
-      <div>
-        <h2>Abstract</h2>
-        <p>
-          DeepUnfolding Agent is a strategy-agnostic adaptive controller framework that exposes
-          deep-unfolded control logic through an API boundary. Rather than embedding adaptation
-          inside a model optimiser, the agent observes runtime diagnostics from an external
-          optimisation process and returns bounded control variables.
-        </p>
-        <p>
-          The framework supports classical, quantum, and hybrid settings. It can adapt variables
-          such as learning rate, proximal strength, local epochs, quantum parameter learning rate,
-          shot count, circuit depth, entanglement depth, and measurement reuse. This interface allows
-          external systems to register their own strategy schemas while reusing a common controller backend.
-        </p>
-      </div>
-      <div class="abstract-box">
-        <h3>Core Idea</h3>
-        <p>
-          Treat adaptive control as a reusable agent that is external to the training system but coupled
-          through diagnostics, bounded controls, and feedback updates.
-        </p>
-      </div>
-    </section>
+.nav-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
 
-    <section id="contributions" class="container section">
-      <h2>Key Contributions</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>Strategy Schema</h3>
-          <p>
-            A declarative schema specifies state variables, control variables, data types, and admissible bounds.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Controller API</h3>
-          <p>
-            A FastAPI service exposes registration, controller creation, control suggestion, update, and experiment endpoints.
-          </p>
-        </article>
-        <article class="card">
-          <h3>Deep-Unfolded Backend</h3>
-          <p>
-            Learnable multi-step control logic adapts strategy-level variables across repeated optimisation rounds.
-          </p>
-        </article>
-      </div>
-    </section>
+.nav-links a:hover {
+  color: #ffffff;
+}
 
-    <section id="architecture" class="container section">
-      <h2>System Architecture</h2>
-      <p>
-        The external training system sends diagnostics to the controller service. The strategy registry and schema adapter
-        convert diagnostics into an ordered state representation. The controller backend predicts bounded controls, which
-        are applied by the external system in the next optimisation round. Feedback is then used to update the controller.
-      </p>
-      <figure class="architecture-figure">
-        <img src="assets/architecture.svg" alt="DeepUnfolding Agent system architecture" />
-        <figcaption>
-          API-level control loop linking an external optimisation system with a schema-driven deep-unfolded controller backend.
-        </figcaption>
-      </figure>
-    </section>
+.hero {
+  background:
+    radial-gradient(circle at top left, rgba(79, 70, 229, 0.35), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.2), transparent 30%),
+    linear-gradient(135deg, #0b1020 0%, #111827 50%, #1e1b4b 100%);
+  color: #ffffff;
+  padding: 92px 0;
+}
 
-    <section id="api" class="container section two-column">
-      <div>
-        <h2>API Interface</h2>
-        <p>
-          The public API exposes endpoints for health checks, strategy registration, controller creation,
-          control suggestion, controller update, quantum controlled-round execution, and experiment retrieval.
-        </p>
-      </div>
-      <pre class="code-block"><code>GET  /health
-GET  /strategies
-POST /strategies/register
-POST /controllers/create
-POST /controllers/{controller_id}/suggest-controls
-POST /controllers/{controller_id}/update-controller
-POST /quantum/run-controlled-round
-GET  /experiments/{run_id}</code></pre>
-    </section>
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
 
-    <section id="usage" class="container section">
-      <h2>Basic Usage</h2>
-      <div class="code-grid">
-        <article>
-          <h3>Run locally</h3>
-          <pre class="code-block"><code>uvicorn app.main:app --reload</code></pre>
-        </article>
-        <article>
-          <h3>Open Swagger UI</h3>
-          <pre class="code-block"><code>http://127.0.0.1:8000/docs</code></pre>
-        </article>
-        <article>
-          <h3>Build Docker image</h3>
-          <pre class="code-block"><code>docker build -t deepunfolding-agent-api:0.1.0 .</code></pre>
-        </article>
-        <article>
-          <h3>Run Docker container</h3>
-          <pre class="code-block"><code>docker run -p 8000:8000 deepunfolding-agent-api:0.1.0</code></pre>
-        </article>
-      </div>
-    </section>
+.eyebrow {
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #a5b4fc;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
 
-    <section id="dataset" class="container section">
-      <h2>Dataset</h2>
-      <p>
-        Add the final dataset link here after you decide where to host the public benchmark data.
-        Recommended options are Hugging Face Datasets, Zenodo, or an institutional repository.
-      </p>
-      <p class="note">
-        Current placeholder link in the top button points to this section. Replace it with the final dataset URL when available.
-      </p>
-    </section>
+.hero-copy h1 {
+  font-size: clamp(2.5rem, 5vw, 4.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  margin: 14px 0 22px;
+}
 
-    <section id="results" class="container section">
-      <h2>Results</h2>
-      <p>
-        Add compact benchmark plots here, such as fixed-versus-controlled validation loss, control trajectories,
-        quantum shot/circuit-depth adaptation, and communication-performance trade-off curves.
-      </p>
-      <div class="result-grid">
-        <article>
-          <strong>Controlled vs Fixed</strong>
-          <span>Validation loss and task metrics</span>
-        </article>
-        <article>
-          <strong>Control Trajectory</strong>
-          <span>Learning rate, shots, depth, and related variables</span>
-        </article>
-        <article>
-          <strong>Deployment</strong>
-          <span>Swagger, command-line, and Docker demonstrations</span>
-        </article>
-      </div>
-    </section>
+.hero-description {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  max-width: 760px;
+  margin: 0;
+}
 
-    <section id="citation" class="container section">
-      <h2>Citation</h2>
-      <pre class="code-block"><code>@article{nanayakkara2026deepunfoldingagent,
-  title   = {DeepUnfolding Agent: A Strategy-Agnostic API Framework for Adaptive Classical, Quantum, and Hybrid Optimisation},
-  author  = {Nanayakkara, Shanika Iroshi, Shiva Raj Pokhrel},
-  year    = {2026}
-}</code></pre>
-    </section>
-  </main>
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
 
-  <footer class="footer">
-    <div class="container footer-content">
-      <p>© 2026 DeepUnfolding Agent Project</p>
-      <p>
-        <a href="https://github.com/deepunfolding-agent/DeepUnfolding-Agent" target="_blank" rel="noopener">GitHub Repository</a>
-      </p>
-    </div>
-  </footer>
-</body>
-</html>
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  border: 1px solid transparent;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+}
+
+.pill-primary {
+  background: #ffffff;
+  color: #1e1b4b;
+  box-shadow: 0 14px 35px rgba(255, 255, 255, 0.12);
+}
+
+.pill-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.pill-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.pill-disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.hero-terminal,
+.code-panel,
+.architecture-panel {
+  background: var(--terminal);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+}
+
+.terminal-bar {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  background: var(--terminal-soft);
+}
+
+.terminal-bar span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #64748b;
+}
+
+pre {
+  margin: 0;
+  overflow-x: auto;
+}
+
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.hero-terminal pre,
+.code-panel pre,
+.architecture-panel pre {
+  padding: 24px;
+  color: #dbeafe;
+  font-size: 0.92rem;
+}
+
+.section {
+  padding: 86px 0;
+}
+
+.section-muted {
+  background: var(--bg-muted);
+}
+
+.section-heading {
+  max-width: 790px;
+  margin-bottom: 28px;
+}
+
+.section-heading h2 {
+  font-size: clamp(2rem, 3.2vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.lead {
+  color: var(--text-muted);
+  font-size: 1.08rem;
+  max-width: 920px;
+  margin: 0 0 34px;
+}
+
+.feature-grid,
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.feature-card,
+.mode-card,
+.endpoint-card,
+.workflow-step {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 26px;
+  box-shadow: var(--card-shadow);
+}
+
+.feature-card h3,
+.mode-card h3,
+.workflow-step h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.feature-card p,
+.mode-card p,
+.endpoint-card p,
+.workflow-step p {
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.mode-icon {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: #eef2ff;
+  color: var(--primary);
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.workflow-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.workflow-step span {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #eef2ff;
+  color: var(--primary);
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.endpoint-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.endpoint-card code {
+  display: block;
+  margin: 14px 0 10px;
+  font-size: 0.96rem;
+  color: #1e293b;
+  word-break: break-word;
+}
+
+.method {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  border-radius: 999px;
+  padding: 0 10px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.method-get {
+  background: #ecfeff;
+  color: #0e7490;
+}
+
+.method-post {
+  background: #eef2ff;
+  color: #4338ca;
+}
+
+.quickstart-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.quickstart-copy p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-top: 0;
+}
+
+.text-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.site-footer {
+  background: #0b1020;
+  color: #cbd5e1;
+  padding: 34px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-content p {
+  margin: 0;
+}
+
+@media (max-width: 980px) {
+  .hero-layout,
+  .feature-grid,
+  .mode-grid,
+  .workflow-strip,
+  .endpoint-grid,
+  .quickstart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 72px 0;
+  }
+
+  .nav {
+    align-items: flex-start;
+    gap: 16px;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    width: min(100% - 28px, 1120px);
+  }
+
+  .hero-copy h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .pill {
+    width: 100%;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+}
