@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DeepUnfolding Agent: a strategy-agnostic deep-unfolded adaptive controller API for classical, quantum, and hybrid optimisation." />
+  <meta name="author" content="Shanika Iroshi Nanayakkara" />
+  <title>DeepUnfolding Agent</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <nav class="top-nav" aria-label="Main navigation">
+    <a class="brand" href="#top" aria-label="DeepUnfolding Agent home">
+      <img src="assets/logo.svg" alt="DeepUnfolding Agent logo" />
+      <span>DeepUnfolding Agent</span>
+    </a>
+    <div class="nav-links">
+      <a href="#abstract">Abstract</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#api">API</a>
+      <a href="#usage">Usage</a>
+      <a href="#citation">Citation</a>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-grid">
+      <section class="hero-copy">
+        <p class="eyebrow">Strategy-Agnostic Adaptive Control</p>
+        <h1>DeepUnfolding Agent</h1>
+        <p class="subtitle">
+          A deep-unfolded controller API for adaptive classical, quantum, and hybrid optimisation systems.
+        </p>
+        <p class="authors">
+          Shanika Iroshi Nanayakkara
+        </p>
+
+        <div class="hero-buttons" aria-label="Project links">
+          <a class="pill pill-primary" href="assets/deepunfolding_agent_paper.pdf" target="_blank" rel="noopener">
+            Paper (PDF) <span aria-hidden="true">📄</span>
+          </a>
+          <a class="pill pill-secondary" href="https://github.com/deepunfolding-agent/DeepUnfolding-Agent" target="_blank" rel="noopener">
+            GitHub <span aria-hidden="true">⭐</span>
+          </a>
+          <a class="pill pill-secondary" href="#dataset">
+            Dataset <span aria-hidden="true">🤗</span>
+          </a>
+        </div>
+      </section>
+
+      <aside class="hero-card" aria-label="Project summary">
+        <div class="card-line"></div>
+        <h2>Controller Boundary</h2>
+        <p>
+          Diagnostics enter the API, the strategy schema defines the state and control spaces,
+          and bounded controls are returned to the external training system.
+        </p>
+        <div class="mini-flow">
+          <span>Diagnostics</span>
+          <span>→</span>
+          <span>Controller</span>
+          <span>→</span>
+          <span>Controls</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section class="container metric-row" aria-label="Project highlights">
+      <article>
+        <strong>Classical</strong>
+        <span>learning rate, proximal strength, local epochs</span>
+      </article>
+      <article>
+        <strong>Quantum</strong>
+        <span>shots, circuit depth, entanglement depth</span>
+      </article>
+      <article>
+        <strong>Hybrid</strong>
+        <span>joint classical–quantum control variables</span>
+      </article>
+      <article>
+        <strong>API-First</strong>
+        <span>FastAPI, Swagger, Docker-ready deployment</span>
+      </article>
+    </section>
+
+    <section id="news" class="container section">
+      <h2>Latest News</h2>
+      <ul class="news-list">
+        <li><time datetime="2026-06">June 2026</time> DeepUnfolding Agent prepared as a public API-based adaptive controller framework.</li>
+        <li><time datetime="2026-06">June 2026</time> Classical, quantum, and hybrid controller pathways integrated under a common schema interface.</li>
+        <li><time datetime="2026-06">June 2026</time> GitHub Pages project website released.</li>
+      </ul>
+    </section>
+
+    <section id="abstract" class="container section two-column">
+      <div>
+        <h2>Abstract</h2>
+        <p>
+          DeepUnfolding Agent is a strategy-agnostic adaptive controller framework that exposes
+          deep-unfolded control logic through an API boundary. Rather than embedding adaptation
+          inside a model optimiser, the agent observes runtime diagnostics from an external
+          optimisation process and returns bounded control variables.
+        </p>
+        <p>
+          The framework supports classical, quantum, and hybrid settings. It can adapt variables
+          such as learning rate, proximal strength, local epochs, quantum parameter learning rate,
+          shot count, circuit depth, entanglement depth, and measurement reuse. This interface allows
+          external systems to register their own strategy schemas while reusing a common controller backend.
+        </p>
+      </div>
+      <div class="abstract-box">
+        <h3>Core Idea</h3>
+        <p>
+          Treat adaptive control as a reusable agent that is external to the training system but coupled
+          through diagnostics, bounded controls, and feedback updates.
+        </p>
+      </div>
+    </section>
+
+    <section id="contributions" class="container section">
+      <h2>Key Contributions</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Strategy Schema</h3>
+          <p>
+            A declarative schema specifies state variables, control variables, data types, and admissible bounds.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Controller API</h3>
+          <p>
+            A FastAPI service exposes registration, controller creation, control suggestion, update, and experiment endpoints.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Deep-Unfolded Backend</h3>
+          <p>
+            Learnable multi-step control logic adapts strategy-level variables across repeated optimisation rounds.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="architecture" class="container section">
+      <h2>System Architecture</h2>
+      <p>
+        The external training system sends diagnostics to the controller service. The strategy registry and schema adapter
+        convert diagnostics into an ordered state representation. The controller backend predicts bounded controls, which
+        are applied by the external system in the next optimisation round. Feedback is then used to update the controller.
+      </p>
+      <figure class="architecture-figure">
+        <img src="assets/architecture.svg" alt="DeepUnfolding Agent system architecture" />
+        <figcaption>
+          API-level control loop linking an external optimisation system with a schema-driven deep-unfolded controller backend.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="api" class="container section two-column">
+      <div>
+        <h2>API Interface</h2>
+        <p>
+          The public API exposes endpoints for health checks, strategy registration, controller creation,
+          control suggestion, controller update, quantum controlled-round execution, and experiment retrieval.
+        </p>
+      </div>
+      <pre class="code-block"><code>GET  /health
+GET  /strategies
+POST /strategies/register
+POST /controllers/create
+POST /controllers/{controller_id}/suggest-controls
+POST /controllers/{controller_id}/update-controller
+POST /quantum/run-controlled-round
+GET  /experiments/{run_id}</code></pre>
+    </section>
+
+    <section id="usage" class="container section">
+      <h2>Basic Usage</h2>
+      <div class="code-grid">
+        <article>
+          <h3>Run locally</h3>
+          <pre class="code-block"><code>uvicorn app.main:app --reload</code></pre>
+        </article>
+        <article>
+          <h3>Open Swagger UI</h3>
+          <pre class="code-block"><code>http://127.0.0.1:8000/docs</code></pre>
+        </article>
+        <article>
+          <h3>Build Docker image</h3>
+          <pre class="code-block"><code>docker build -t deepunfolding-agent-api:0.1.0 .</code></pre>
+        </article>
+        <article>
+          <h3>Run Docker container</h3>
+          <pre class="code-block"><code>docker run -p 8000:8000 deepunfolding-agent-api:0.1.0</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section id="dataset" class="container section">
+      <h2>Dataset</h2>
+      <p>
+        Add the final dataset link here after you decide where to host the public benchmark data.
+        Recommended options are Hugging Face Datasets, Zenodo, or an institutional repository.
+      </p>
+      <p class="note">
+        Current placeholder link in the top button points to this section. Replace it with the final dataset URL when available.
+      </p>
+    </section>
+
+    <section id="results" class="container section">
+      <h2>Results</h2>
+      <p>
+        Add compact benchmark plots here, such as fixed-versus-controlled validation loss, control trajectories,
+        quantum shot/circuit-depth adaptation, and communication-performance trade-off curves.
+      </p>
+      <div class="result-grid">
+        <article>
+          <strong>Controlled vs Fixed</strong>
+          <span>Validation loss and task metrics</span>
+        </article>
+        <article>
+          <strong>Control Trajectory</strong>
+          <span>Learning rate, shots, depth, and related variables</span>
+        </article>
+        <article>
+          <strong>Deployment</strong>
+          <span>Swagger, command-line, and Docker demonstrations</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="citation" class="container section">
+      <h2>Citation</h2>
+      <pre class="code-block"><code>@article{nanayakkara2026deepunfoldingagent,
+  title   = {DeepUnfolding Agent: A Strategy-Agnostic API Framework for Adaptive Classical, Quantum, and Hybrid Optimisation},
+  author  = {Nanayakkara, Shanika Iroshi},
+  year    = {2026}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2026 DeepUnfolding Agent Project</p>
+      <p>
+        <a href="https://github.com/deepunfolding-agent/DeepUnfolding-Agent" target="_blank" rel="noopener">GitHub Repository</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
