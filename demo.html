@@ -142,62 +142,111 @@
   </div>
 </section>
 
-    <section id="architecture" class="section">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Architecture Overview</p>
-          <h2>From user goal to autonomous control decision</h2>
+   <section id="architecture" class="section">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Architecture Overview</p>
+      <h2>Closed-loop DeepUnfolding Agent API flow</h2>
+      <p>
+        The architecture is shown as an autonomous observe-decide-act-update loop.
+        Each highlighted block corresponds to one API or internal agent step.
+      </p>
+    </div>
+
+    <div class="flowchart-panel" aria-label="DeepUnfolding Agent API flowchart">
+      <div class="flow-row flow-row-top">
+        <div class="flow-node" data-step="0">
+          <span>01</span>
+          <h3>User Goal</h3>
+          <p>Objective, diagnostics, constraints, executor type.</p>
+          <code>POST /agent/run-autonomous-experiment</code>
         </div>
 
-        <div class="architecture-flow" aria-label="DeepUnfolding Agent architecture">
-          <div class="demo-node" data-step="0">
-            <span>01</span>
-            <h3>User Goal</h3>
-            <p>Define objective, target metric, constraints, and maximum rounds.</p>
-          </div>
+        <div class="flow-arrow">→</div>
 
-          <div class="demo-arrow">→</div>
+        <div class="flow-node" data-step="1">
+          <span>02</span>
+          <h3>Strategy Schema</h3>
+          <p>Loads required diagnostics and bounded controls.</p>
+          <code>GET /strategies</code>
+        </div>
 
-          <div class="demo-node" data-step="1">
-            <span>02</span>
-            <h3>Strategy Registry</h3>
-            <p>Load the registered schema for diagnostics and bounded controls.</p>
-          </div>
+        <div class="flow-arrow">→</div>
 
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="2">
-            <span>03</span>
-            <h3>Controller Factory</h3>
-            <p>Create a classical, quantum, or hybrid deep-unfolded controller.</p>
-          </div>
-
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="3">
-            <span>04</span>
-            <h3>Deep-Unfolded Controller</h3>
-            <p>Map runtime diagnostics to bounded strategy-level controls.</p>
-          </div>
-
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="4">
-            <span>05</span>
-            <h3>Executor</h3>
-            <p>Run one controlled optimisation round using the selected controls.</p>
-          </div>
-
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="5">
-            <span>06</span>
-            <h3>Evaluator</h3>
-            <p>Assess feedback, update the best result, and decide continue or stop.</p>
-          </div>
+        <div class="flow-node" data-step="2">
+          <span>03</span>
+          <h3>Controller Factory</h3>
+          <p>Creates the selected classical, quantum, or hybrid controller.</p>
+          <code>POST /controllers/create</code>
         </div>
       </div>
-    </section>
+
+      <div class="flow-connector-down">↓</div>
+
+      <div class="flow-row">
+        <div class="flow-node" data-step="3">
+          <span>04</span>
+          <h3>Suggest Controls</h3>
+          <p>Maps diagnostics to adaptive control variables.</p>
+          <code>POST /controllers/{id}/suggest-controls</code>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-node" data-step="4">
+          <span>05</span>
+          <h3>Safety Guard</h3>
+          <p>Clips controls using schema bounds and user constraints.</p>
+          <code>Internal bounded safety layer</code>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-node" data-step="5">
+          <span>06</span>
+          <h3>Executor</h3>
+          <p>Runs one controlled optimisation or quantum round.</p>
+          <code>POST /quantum/run-controlled-round</code>
+        </div>
+      </div>
+
+      <div class="flow-connector-down">↓</div>
+
+      <div class="flow-row">
+        <div class="flow-node" data-step="6">
+          <span>07</span>
+          <h3>Update Controller</h3>
+          <p>Uses feedback to improve future control suggestions.</p>
+          <code>POST /controllers/{id}/update-controller</code>
+        </div>
+
+        <div class="flow-arrow">←</div>
+
+        <div class="flow-node flow-feedback">
+          <span>FB</span>
+          <h3>Feedback</h3>
+          <p>Validation loss, reward, next diagnostics, execution metadata.</p>
+          <code>feedback payload</code>
+        </div>
+
+        <div class="flow-arrow">←</div>
+
+        <div class="flow-node" data-step="7">
+          <span>08</span>
+          <h3>Evaluator Decision</h3>
+          <p>Continue, stop, save best result, or reach maximum rounds.</p>
+          <code>continue / stop / save</code>
+        </div>
+      </div>
+
+      <div class="loop-note">
+        <strong>Loop behaviour:</strong>
+        if the stopping condition is not met, the evaluator sends updated diagnostics
+        back to the controller for the next autonomous round.
+      </div>
+    </div>
+  </div>
+</section>
 
     <section id="round-loop" class="section section-muted">
   <div class="container">
