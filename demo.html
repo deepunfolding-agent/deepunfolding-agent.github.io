@@ -276,7 +276,7 @@
     .dashboard-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 18px;
+  gap: 22px;
   align-items: stretch;
 }
 
@@ -434,10 +434,9 @@
     }
 
     .inspector {
-      display: grid;
-      grid-template-columns: 230px 1fr;
-      min-height: 100%;
-    }
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+}
 
     .step-list {
       border-right: 1px solid rgba(148, 163, 184, 0.16);
@@ -479,9 +478,9 @@
       color: var(--blue);
     }
 
-    .inspect-content {
-      padding: 20px;
-    }
+   .inspect-content {
+  min-width: 0;
+}
 
     .endpoint-line {
       display: flex;
@@ -537,17 +536,10 @@
     }
 
     pre {
-      margin: 0;
-      max-height: 200px;
-      overflow: auto;
-      padding: 16px;
-      background: #020817;
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      border-radius: 12px;
-      color: #c4b5fd;
-      font-size: 0.78rem;
-      line-height: 1.5;
-    }
+  width: 100%;
+  max-width: 100%;
+  overflow: auto;
+}
 
     .agent-box {
       margin-top: 14px;
