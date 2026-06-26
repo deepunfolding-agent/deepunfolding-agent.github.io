@@ -161,125 +161,96 @@ POST /controllers/{id}/update-controller</code></pre>
   <div class="container">
     <div class="section-heading">
       <p class="eyebrow">Workflow Overview</p>
-      <h2>How users and external systems use DeepUnfolding Agent</h2>
+      <h2>How external users use DeepUnfolding Agent</h2>
       <p>
-        DeepUnfolding Agent connects user goals, strategy schemas, adaptive
-        controllers, and external execution backends through a bounded
-        closed-loop optimisation process.
+        DeepUnfolding Agent provides a bounded autonomous control layer between
+        real-world optimisation tasks and classical, quantum, or hybrid execution backends.
       </p>
     </div>
 
-    <div class="simple-workflow">
-      <div class="workflow-column">
-        <div class="workflow-title">External World</div>
-
-        <div class="workflow-card domain-card">
-          <div class="workflow-icon">🏥</div>
-          <h3>Healthcare / Medical AI</h3>
-          <p>Adaptive model control for diagnosis, clinical decision support, and distributed learning.</p>
+    <div class="diagram-workflow">
+      <div class="diagram-panel diagram-external">
+        <div class="diagram-panel-title">
+          <span>🌍</span>
+          <h3>External World / Users / Domains</h3>
         </div>
 
-        <div class="workflow-card domain-card">
-          <div class="workflow-icon">🚗</div>
-          <h3>Smart Transport</h3>
-          <p>Control traffic, mobility, routing, and autonomous-system optimisation workflows.</p>
+        <div class="domain-grid">
+          <div class="domain-chip">🏥 Healthcare AI</div>
+          <div class="domain-chip">🚗 Smart Transport</div>
+          <div class="domain-chip">💳 Finance / Fraud</div>
+          <div class="domain-chip">🤖 Robotics</div>
+          <div class="domain-chip">🧬 Bioinformatics</div>
+          <div class="domain-chip">⚛️ Quantum Research</div>
         </div>
 
-        <div class="workflow-card domain-card">
-          <div class="workflow-icon">💳</div>
-          <h3>Finance / Fraud Detection</h3>
-          <p>Optimise fraud detection, risk modelling, and adaptive financial learning systems.</p>
+        <p>
+          Users provide objectives, diagnostics, constraints, and runtime context
+          from any optimisation domain.
+        </p>
+      </div>
+
+      <div class="diagram-arrow">→</div>
+
+      <div class="diagram-panel diagram-agent">
+        <div class="diagram-panel-title">
+          <span>🧠</span>
+          <h3>DeepUnfolding Agent API</h3>
         </div>
 
-        <div class="workflow-card domain-card">
-          <div class="workflow-icon">⚛️</div>
-          <h3>Quantum Research</h3>
-          <p>Support quantum model tuning, simulator experiments, and hardware-aware control.</p>
+        <div class="agent-core">
+          <div class="agent-step">🎯 Goal Manager</div>
+          <div class="agent-step">📚 Strategy Registry</div>
+          <div class="agent-step">⚙️ Controller Factory</div>
+          <div class="agent-step strong">🧠 Deep-Unfolded Controller</div>
+          <div class="agent-step quantum">⚛️ Quantum-Aware Control</div>
+          <div class="agent-step">🛡️ Safety Guard</div>
+          <div class="agent-step">🔁 Evaluator + Update Loop</div>
         </div>
       </div>
 
-      <div class="workflow-arrow-main">→</div>
+      <div class="diagram-arrow">→</div>
 
-      <div class="workflow-column workflow-agent">
-        <div class="workflow-title">DeepUnfolding Agent API</div>
-
-        <div class="agent-stack">
-          <div class="workflow-card agent-card">
-            <div class="workflow-icon">🎯</div>
-            <h3>Goal / Request Manager</h3>
-            <p>Receives objective, diagnostics, constraints, budget, and execution preferences.</p>
-          </div>
-
-          <div class="workflow-card agent-card">
-            <div class="workflow-icon">📚</div>
-            <h3>Strategy Registry + Schema Adapter</h3>
-            <p>Maps user goals to classical, quantum, or hybrid control schemas.</p>
-          </div>
-
-          <div class="workflow-card agent-card">
-            <div class="workflow-icon">🧠</div>
-            <h3>Deep-Unfolded Controllers</h3>
-            <p>Suggests bounded controls using classical, quantum, or hybrid controller backends.</p>
-          </div>
-
-          <div class="workflow-card agent-card quantum-highlight">
-            <div class="workflow-icon">⚛️</div>
-            <h3>Quantum-Aware Control</h3>
-            <p>
-              Adapts learning rate, shots, circuit depth, entanglement depth,
-              and measurement reuse for quantum workflows.
-            </p>
-          </div>
-
-          <div class="workflow-card agent-card">
-            <div class="workflow-icon">🛡️</div>
-            <h3>Safety Guard + Evaluator</h3>
-            <p>Applies bounds, evaluates feedback, updates the controller, and decides continue or stop.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="workflow-arrow-main">→</div>
-
-      <div class="workflow-column">
-        <div class="workflow-title">Execution Backends</div>
-
-        <div class="workflow-card backend-card">
-          <div class="workflow-icon">🖥️</div>
-          <h3>Classical ML / Federated Learning</h3>
-          <p>External training systems, GPUs, clusters, and distributed clients.</p>
+      <div class="diagram-panel diagram-backend">
+        <div class="diagram-panel-title">
+          <span>🚀</span>
+          <h3>Execution Backends</h3>
         </div>
 
-        <div class="workflow-card backend-card quantum-highlight">
-          <div class="workflow-icon">⚛️</div>
-          <h3>Quantum Simulator</h3>
-          <p>Qiskit Aer or similar simulators for high-speed quantum model experiments.</p>
+        <div class="backend-stack">
+          <div class="backend-box">🖥️ Classical ML / Federated Learning</div>
+          <div class="backend-box quantum">⚛️ Qiskit Aer Quantum Simulator</div>
+          <div class="backend-box quantum">🔬 Real Quantum Hardware / IBM QPU</div>
+          <div class="backend-box">🔁 Hybrid Classical–Quantum Workflow</div>
         </div>
 
-        <div class="workflow-card backend-card quantum-highlight">
-          <div class="workflow-icon">🔬</div>
-          <h3>Real Quantum Hardware</h3>
-          <p>Optional IBM QPU or other quantum processors for hardware-aware control.</p>
-        </div>
-
-        <div class="workflow-card backend-card">
-          <div class="workflow-icon">🔁</div>
-          <h3>Hybrid Optimisation</h3>
-          <p>Combines classical and quantum components within one adaptive control loop.</p>
-        </div>
+        <p>
+          Controls are applied to real or simulated execution systems, and feedback
+          is returned to improve future decisions.
+        </p>
       </div>
     </div>
 
-    <div class="workflow-outcome">
-      <div>
-        <strong>Outcome:</strong>
-        bounded controls, improved controller behaviour, best experiment tracking,
-        and continue/stop decisions.
-      </div>
+    <div class="diagram-loop">
+      <div class="loop-pill">Diagnostics</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-pill">Suggest Controls</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-pill">Execute</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-pill">Feedback</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-pill">Update Controller</div>
+      <div class="loop-arrow">↺</div>
+    </div>
 
-      <a class="pill pill-secondary" href="demo.html">
-        Open Interactive Demo →
-      </a>
+    <div class="diagram-benefits">
+      <div class="benefit-card">✅ Bounded Autonomy</div>
+      <div class="benefit-card">📈 Learnability</div>
+      <div class="benefit-card">⚛️ Quantum Model Support</div>
+      <div class="benefit-card">🔁 Classical / Quantum / Hybrid Reuse</div>
+      <div class="benefit-card">🧪 Experiment Tracking</div>
+      <div class="benefit-card">🚀 Deployment Ready API</div>
     </div>
   </div>
 </section>
