@@ -158,69 +158,132 @@ POST /controllers/{id}/update-controller</code></pre>
       </div>
     </section>
 
-    <section id="workflow" class="section">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Execution Flow</p>
-          <h2>Diagnostics in, bounded controls out</h2>
+   <section id="workflow" class="section">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Workflow Overview</p>
+      <h2>How users and external systems use DeepUnfolding Agent</h2>
+      <p>
+        DeepUnfolding Agent connects user goals, strategy schemas, adaptive
+        controllers, and external execution backends through a bounded
+        closed-loop optimisation process.
+      </p>
+    </div>
+
+    <div class="simple-workflow">
+      <div class="workflow-column">
+        <div class="workflow-title">External World</div>
+
+        <div class="workflow-card domain-card">
+          <div class="workflow-icon">🏥</div>
+          <h3>Healthcare / Medical AI</h3>
+          <p>Adaptive model control for diagnosis, clinical decision support, and distributed learning.</p>
         </div>
 
-        <div class="workflow-strip">
-          <div class="workflow-step">
-            <span>01</span>
-            <h3>Diagnostics</h3>
-            <p>
-              External systems send runtime signals such as loss, gradient norm,
-              update norm, shot noise, circuit depth, and round index.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span>02</span>
-            <h3>Controller State</h3>
-            <p>
-              The schema adapter converts diagnostics into an ordered state vector
-              defined by the registered strategy schema.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span>03</span>
-            <h3>Control Prediction</h3>
-            <p>
-              The controller backend predicts bounded control variables for the
-              next optimisation round.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span>04</span>
-            <h3>Feedback Update</h3>
-            <p>
-              The external system applies controls, returns feedback, and the
-              controller updates its internal parameters and logs the experiment.
-            </p>
-          </div>
+        <div class="workflow-card domain-card">
+          <div class="workflow-icon">🚗</div>
+          <h3>Smart Transport</h3>
+          <p>Control traffic, mobility, routing, and autonomous-system optimisation workflows.</p>
         </div>
 
-        <div class="architecture-panel">
-<pre><code>External Training System
-        ↓ diagnostics
-FastAPI Controller Service
-        ↓
-Strategy Registry / Schema Adapter
-        ↓
-Controller Factory
-        ↓
-Classical / Quantum / Hybrid Controller Backend
-        ↓ bounded controls
-External Training System Applies Controls
-        ↓ feedback
-Controller Update / Experiment Logger / Storage</code></pre>
+        <div class="workflow-card domain-card">
+          <div class="workflow-icon">💳</div>
+          <h3>Finance / Fraud Detection</h3>
+          <p>Optimise fraud detection, risk modelling, and adaptive financial learning systems.</p>
+        </div>
+
+        <div class="workflow-card domain-card">
+          <div class="workflow-icon">⚛️</div>
+          <h3>Quantum Research</h3>
+          <p>Support quantum model tuning, simulator experiments, and hardware-aware control.</p>
         </div>
       </div>
-    </section>
 
+      <div class="workflow-arrow-main">→</div>
+
+      <div class="workflow-column workflow-agent">
+        <div class="workflow-title">DeepUnfolding Agent API</div>
+
+        <div class="agent-stack">
+          <div class="workflow-card agent-card">
+            <div class="workflow-icon">🎯</div>
+            <h3>Goal / Request Manager</h3>
+            <p>Receives objective, diagnostics, constraints, budget, and execution preferences.</p>
+          </div>
+
+          <div class="workflow-card agent-card">
+            <div class="workflow-icon">📚</div>
+            <h3>Strategy Registry + Schema Adapter</h3>
+            <p>Maps user goals to classical, quantum, or hybrid control schemas.</p>
+          </div>
+
+          <div class="workflow-card agent-card">
+            <div class="workflow-icon">🧠</div>
+            <h3>Deep-Unfolded Controllers</h3>
+            <p>Suggests bounded controls using classical, quantum, or hybrid controller backends.</p>
+          </div>
+
+          <div class="workflow-card agent-card quantum-highlight">
+            <div class="workflow-icon">⚛️</div>
+            <h3>Quantum-Aware Control</h3>
+            <p>
+              Adapts learning rate, shots, circuit depth, entanglement depth,
+              and measurement reuse for quantum workflows.
+            </p>
+          </div>
+
+          <div class="workflow-card agent-card">
+            <div class="workflow-icon">🛡️</div>
+            <h3>Safety Guard + Evaluator</h3>
+            <p>Applies bounds, evaluates feedback, updates the controller, and decides continue or stop.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="workflow-arrow-main">→</div>
+
+      <div class="workflow-column">
+        <div class="workflow-title">Execution Backends</div>
+
+        <div class="workflow-card backend-card">
+          <div class="workflow-icon">🖥️</div>
+          <h3>Classical ML / Federated Learning</h3>
+          <p>External training systems, GPUs, clusters, and distributed clients.</p>
+        </div>
+
+        <div class="workflow-card backend-card quantum-highlight">
+          <div class="workflow-icon">⚛️</div>
+          <h3>Quantum Simulator</h3>
+          <p>Qiskit Aer or similar simulators for high-speed quantum model experiments.</p>
+        </div>
+
+        <div class="workflow-card backend-card quantum-highlight">
+          <div class="workflow-icon">🔬</div>
+          <h3>Real Quantum Hardware</h3>
+          <p>Optional IBM QPU or other quantum processors for hardware-aware control.</p>
+        </div>
+
+        <div class="workflow-card backend-card">
+          <div class="workflow-icon">🔁</div>
+          <h3>Hybrid Optimisation</h3>
+          <p>Combines classical and quantum components within one adaptive control loop.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="workflow-outcome">
+      <div>
+        <strong>Outcome:</strong>
+        bounded controls, improved controller behaviour, best experiment tracking,
+        and continue/stop decisions.
+      </div>
+
+      <a class="pill pill-secondary" href="demo.html">
+        Open Interactive Demo →
+      </a>
+    </div>
+  </div>
+</section>
     <section id="api" class="section section-muted">
       <div class="container">
         <div class="section-heading">
