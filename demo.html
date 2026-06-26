@@ -1,229 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>DeepUnfolding Agent | Interactive API Demo</title>
-
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="index.html">
-        <span class="brand-mark">DU</span>
-        <span>DeepUnfolding Agent</span>
-      </a>
-
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#round-loop">Autonomous Loop</a>
-        <a href="#metrics">Metrics</a>
-      </nav>
+<section id="api-inspector" class="section">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Interactive API Inspector</p>
+      <h2>Inspect each autonomous API step</h2>
+      <p>
+        Click a step or use the demo controls to inspect the endpoint,
+        request payload, response payload, and agent interpretation.
+      </p>
     </div>
-  </header>
 
-  <main>
-    <section class="hero demo-hero">
-      <div class="container hero-layout">
-        <div class="hero-copy">
-          <p class="eyebrow">Interactive API Process Visualisation</p>
+    <div class="inspector-layout">
+      <div class="inspector-steps">
+        <button class="inspector-step" data-inspect-step="0" type="button">
+          1. Submit autonomous goal
+        </button>
 
-          <h1>How DeepUnfolding Agent Operates</h1>
+        <button class="inspector-step" data-inspect-step="1" type="button">
+          2. Load strategy schema
+        </button>
 
-          <p class="hero-description">
-            This interactive demo illustrates how the DeepUnfolding Agent API
-            performs autonomous optimisation control: receiving a goal, creating
-            a controller, suggesting bounded controls, executing a round,
-            receiving feedback, updating the controller, and deciding whether
-            to continue or stop.
-          </p>
+        <button class="inspector-step" data-inspect-step="2" type="button">
+          3. Create controller
+        </button>
 
-          <div class="hero-buttons">
-            <button class="pill pill-primary" id="startDemo" type="button">
-              Start Demo
-            </button>
+        <button class="inspector-step" data-inspect-step="3" type="button">
+          4. Suggest controls
+        </button>
 
-            <button class="pill pill-secondary" id="nextStep" type="button">
-              Next Step
-            </button>
+        <button class="inspector-step" data-inspect-step="4" type="button">
+          5. Apply safety guard
+        </button>
 
-            <button class="pill pill-secondary" id="resetDemo" type="button">
-              Reset
-            </button>
-          </div>
-        </div>
+        <button class="inspector-step" data-inspect-step="5" type="button">
+          6. Execute controlled round
+        </button>
 
-        <div class="demo-status-panel">
-          <p class="eyebrow">Current Agent State</p>
-          <h2 id="currentStepTitle">Ready</h2>
-          <p id="currentStepDescription">
-            Press Start Demo to animate the API process.
-          </p>
-        </div>
+        <button class="inspector-step" data-inspect-step="6" type="button">
+          7. Update controller
+        </button>
+
+        <button class="inspector-step" data-inspect-step="7" type="button">
+          8. Evaluate continue/stop
+        </button>
       </div>
-    </section>
 
-    <section id="architecture" class="section">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Architecture Overview</p>
-          <h2>From user goal to autonomous control decision</h2>
+      <div class="inspector-panel">
+        <div class="endpoint-badge" id="inspectorEndpoint">
+          Ready
         </div>
 
-        <div class="architecture-flow" aria-label="DeepUnfolding Agent architecture">
-          <div class="demo-node" data-step="0">
-            <span>01</span>
-            <h3>User Goal</h3>
-            <p>Define objective, target metric, constraints, and maximum rounds.</p>
+        <h3 id="inspectorTitle">Select a step</h3>
+
+        <p id="inspectorExplanation">
+          Choose a process step to see the API endpoint, request body,
+          response body, and agent decision.
+        </p>
+
+        <div class="json-grid">
+          <div>
+            <h4>Request</h4>
+            <pre><code id="requestJson">{}</code></pre>
           </div>
 
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="1">
-            <span>02</span>
-            <h3>Strategy Registry</h3>
-            <p>Load the registered schema for diagnostics and bounded controls.</p>
-          </div>
-
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="2">
-            <span>03</span>
-            <h3>Controller Factory</h3>
-            <p>Create a classical, quantum, or hybrid deep-unfolded controller.</p>
-          </div>
-
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="3">
-            <span>04</span>
-            <h3>Deep-Unfolded Controller</h3>
-            <p>Map runtime diagnostics to bounded strategy-level controls.</p>
-          </div>
-
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="4">
-            <span>05</span>
-            <h3>Executor</h3>
-            <p>Run one controlled optimisation round using the selected controls.</p>
-          </div>
-
-          <div class="demo-arrow">→</div>
-
-          <div class="demo-node" data-step="5">
-            <span>06</span>
-            <h3>Evaluator</h3>
-            <p>Assess feedback, update the best result, and decide continue or stop.</p>
+          <div>
+            <h4>Response</h4>
+            <pre><code id="responseJson">{}</code></pre>
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="round-loop" class="section section-muted">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Autonomous Round Loop</p>
-          <h2>Observe → decide → act → evaluate → update</h2>
-        </div>
-
-        <div class="loop-grid">
-          <article class="loop-card" data-step="0">
-            <h3>Goal received</h3>
-            <code>POST /agent/run-autonomous-experiment</code>
-            <p>The API receives the objective, diagnostics, constraints, and executor type.</p>
-          </article>
-
-          <article class="loop-card" data-step="1">
-            <h3>Schema loaded</h3>
-            <code>GET /strategies</code>
-            <p>The agent retrieves the expected diagnostics and control-variable bounds.</p>
-          </article>
-
-          <article class="loop-card" data-step="2">
-            <h3>Controller created</h3>
-            <code>POST /controllers/create</code>
-            <p>The controller backend is instantiated for the selected strategy.</p>
-          </article>
-
-          <article class="loop-card" data-step="3">
-            <h3>Controls suggested</h3>
-            <code>POST /controllers/{id}/suggest-controls</code>
-            <p>The deep-unfolded controller proposes bounded control variables.</p>
-          </article>
-
-          <article class="loop-card" data-step="4">
-            <h3>Round executed</h3>
-            <code>POST /quantum/run-controlled-round</code>
-            <p>The executor applies the controls and returns feedback metrics.</p>
-          </article>
-
-          <article class="loop-card" data-step="5">
-            <h3>Controller updated</h3>
-            <code>POST /controllers/{id}/update-controller</code>
-            <p>The controller uses feedback to improve future control suggestions.</p>
-          </article>
-
-          <article class="loop-card" data-step="6">
-            <h3>Decision made</h3>
-            <code>continue / stop / save best</code>
-            <p>The evaluator decides whether to continue, stop, or save the best run.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="metrics" class="section">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Metric Panel</p>
-          <h2>Example autonomous run state</h2>
-        </div>
-
-        <div class="metric-grid">
-          <div class="metric-card-demo">
-            <span>Round</span>
-            <strong id="metricRound">0</strong>
-          </div>
-
-          <div class="metric-card-demo">
-            <span>Validation Loss</span>
-            <strong id="metricLoss">0.800</strong>
-          </div>
-
-          <div class="metric-card-demo">
-            <span>Shots</span>
-            <strong id="metricShots">—</strong>
-          </div>
-
-          <div class="metric-card-demo">
-            <span>Decision</span>
-            <strong id="metricDecision">Ready</strong>
-          </div>
-        </div>
-
-        <div class="demo-callout">
-          <strong>Interpretation:</strong>
-          The visualisation demonstrates the agentic control loop. In production
-          mode, the control values come from the real deep-unfolded controller,
-          and feedback can come from a real quantum, classical, hybrid, or
-          external executor.
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-content">
-      <p>© 2026 DeepUnfolding Agent Project</p>
-      <p>Interactive API process visualisation</p>
     </div>
-  </footer>
-
-  <script src="demo.js"></script>
-</body>
-</html>
+  </div>
+</section>
