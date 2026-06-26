@@ -882,3 +882,121 @@ code {
     min-height: auto;
   }
 }
+.simple-workflow {
+  display: grid;
+  grid-template-columns: 1fr auto 1.25fr auto 1fr;
+  gap: 18px;
+  align-items: center;
+  margin-top: 36px;
+}
+
+.workflow-column {
+  display: grid;
+  gap: 14px;
+}
+
+.workflow-title {
+  font-weight: 900;
+  color: #111827;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.workflow-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 16px 45px rgba(15, 23, 42, 0.08);
+}
+
+.workflow-card h3 {
+  margin: 8px 0 8px;
+  color: #111827;
+  font-size: 1rem;
+}
+
+.workflow-card p {
+  margin: 0;
+  color: #475569;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.workflow-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #eef2ff;
+  font-size: 1.35rem;
+}
+
+.workflow-arrow-main {
+  color: #4f46e5;
+  font-size: 2.2rem;
+  font-weight: 900;
+}
+
+.workflow-agent {
+  background: linear-gradient(180deg, #eef2ff, #f8fafc);
+  border: 1px solid #c7d2fe;
+  border-radius: 28px;
+  padding: 22px;
+}
+
+.agent-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.agent-card {
+  border-color: #c7d2fe;
+}
+
+.domain-card {
+  border-left: 5px solid #3b82f6;
+}
+
+.backend-card {
+  border-left: 5px solid #06b6d4;
+}
+
+.quantum-highlight {
+  border-color: #a78bfa;
+  background: linear-gradient(135deg, #ffffff, #f5f3ff);
+}
+
+.quantum-highlight .workflow-icon {
+  background: #ede9fe;
+}
+
+.workflow-outcome {
+  margin-top: 28px;
+  padding: 20px 22px;
+  border-radius: 22px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #1e1b4b;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (max-width: 1100px) {
+  .simple-workflow {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-arrow-main {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+
+  .workflow-outcome {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
