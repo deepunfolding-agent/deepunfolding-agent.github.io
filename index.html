@@ -25,6 +25,7 @@
         <a href="#pipeline">Pipeline</a>
         <a href="#demo">Interactive Demo</a>
         <a href="#results">Results</a>
+        <a href="#validation">Validation</a>
         <a href="#figures">Figures</a>
         <a href="#people">People</a>
         <a href="#citation">Citation</a>
@@ -74,22 +75,86 @@
     </section>
 
     <section class="metrics-strip container" aria-label="Project highlights">
-      <article class="metric-card">
-        <span class="metric-value">3</span>
-        <span class="metric-label">Controller families</span>
+      <article class="metric-card emphasis">
+        <span class="metric-value">5.00×</span>
+        <span class="metric-label">Classical DUAgent speed-up</span>
       </article>
-      <article class="metric-card">
-        <span class="metric-value">API</span>
-        <span class="metric-label">Strategy-agnostic integration</span>
+      <article class="metric-card emphasis">
+        <span class="metric-value">56.6%</span>
+        <span class="metric-label">Classical loss reduction with DUAgent</span>
       </article>
-      <article class="metric-card">
-        <span class="metric-value">QFL</span>
-        <span class="metric-label">Quantum-aware controls</span>
+      <article class="metric-card emphasis">
+        <span class="metric-value">3.44×</span>
+        <span class="metric-label">Overall speed-up over the fixed baseline</span>
       </article>
-      <article class="metric-card">
-        <span class="metric-value">2026</span>
-        <span class="metric-label">Repository created</span>
+      <article class="metric-card emphasis">
+        <span class="metric-value">58%</span>
+        <span class="metric-label">Automated suite line coverage · 21 pass · 3 skip</span>
       </article>
+    </section>
+
+    <section class="section-pad light" id="highlights">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">DUAgent headline outcomes</p>
+          <h2>Performance Highlights</h2>
+          <p>These summary figures are adapted from the external-user benchmark table and are presented in the compact, metric-first style commonly used on academic project pages.</p>
+        </div>
+
+        <div class="highlight-grid">
+          <article class="highlight-card">
+            <span class="result-label">Overall workflow</span>
+            <div class="badge-row"><span class="gain-badge positive">+4.3 pp F1 vs Fixed</span><span class="gain-badge positive">3.44× speed-up</span></div>
+            <h3>Best overall macro-F1</h3>
+            <div class="big-stat">53.2%</div>
+            <p>DUAgent improves final macro-F1 from <strong>48.9%</strong> to <strong>53.2%</strong> and reduces final loss from <strong>0.658</strong> to <strong>0.484</strong>.</p>
+            <ul class="mini-list">
+              <li><strong>+4.3 points</strong> macro-F1 over Fixed</li>
+              <li><strong>−26.4%</strong> final-loss improvement</li>
+              <li><strong>3.44×</strong> time-to-target speed-up</li>
+            </ul>
+          </article>
+
+          <article class="highlight-card">
+            <span class="result-label">Classical workflow</span>
+            <div class="badge-row"><span class="gain-badge positive">+10.3 pp F1 vs Fixed</span><span class="gain-badge positive">5.00× speed-up</span></div>
+            <h3>Strongest benchmark gain</h3>
+            <div class="big-stat">72.9%</div>
+            <p>DUAgent yields the strongest classical gain, increasing final macro-F1 from <strong>62.6%</strong> to <strong>72.9%</strong> while lowering final loss from <strong>0.613</strong> to <strong>0.304</strong>.</p>
+            <ul class="mini-list">
+              <li><strong>+10.3 points</strong> macro-F1</li>
+              <li><strong>56.6%</strong> reported loss reduction</li>
+              <li><strong>5.00×</strong> speed-up</li>
+            </ul>
+          </article>
+
+          <article class="highlight-card">
+            <span class="result-label">Quantum workflow</span>
+            <div class="badge-row"><span class="gain-badge positive">+8.5 pp loss-reduction gain</span><span class="gain-badge positive">1.89× speed-up</span></div>
+            <h3>Improved optimisation efficiency</h3>
+            <div class="big-stat">1.89×</div>
+            <p>In QFL, DUAgent lowers final loss from <strong>0.695</strong> to <strong>0.634</strong> and increases reported loss reduction from <strong>21.0%</strong> to <strong>29.5%</strong>.</p>
+            <ul class="mini-list">
+              <li><strong>−8.8%</strong> final-loss improvement</li>
+              <li><strong>+8.5 points</strong> loss-reduction gain</li>
+              <li><strong>1.89×</strong> speed-up</li>
+            </ul>
+          </article>
+
+          <article class="highlight-card">
+            <span class="result-label">Software validation</span>
+            <div class="badge-row"><span class="gain-badge positive">21 pass</span><span class="gain-badge neutral">3 skip</span></div>
+            <h3>Automated testing evidence</h3>
+            <div class="big-stat">21 / 3</div>
+            <p>The default automated software validation suite reports <strong>21 passes</strong>, <strong>3 skips</strong>, and <strong>58%</strong> total line coverage over <strong>1762</strong> statements.</p>
+            <ul class="mini-list">
+              <li><strong>100%</strong> API schema coverage evidence</li>
+              <li><strong>100%</strong> routes coverage evidence</li>
+              <li><strong>76–100%</strong> orchestration and executor evidence</li>
+            </ul>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="section-pad light" id="news">
@@ -107,7 +172,7 @@
       <div class="container narrow">
         <h2>Abstract</h2>
         <p>
-          Adaptive controllers for classical, quantum, and hybrid optimization workflows are often implemented as task-specific code coupled to a particular dataset, model, or training loop. This limits reproducibility, reuse, and comparison across learning strategies.
+          Adaptive controllers for classical, quantum, and hybrid optimisation workflows are often implemented as task-specific code coupled to a particular dataset, model, or training loop. This limits reproducibility, reuse, and comparison across learning strategies.
         </p>
         <p>
           DeepUnfolding-Agent addresses this limitation by exposing deep-unfolded adaptive control through a schema-based FastAPI interface. External systems provide runtime diagnostic variables and receive bounded control variables, enabling reusable controller integration across federated learning, quantum federated learning, and hybrid optimisation settings.
@@ -146,7 +211,7 @@
         </div>
         <div class="image-panel">
           <img src="assets/figures/api_control_lifecycle_matrix.svg" alt="DUAgent closed-loop adaptive-control pipeline" />
-          <p class="caption">DUAgent closed-loop workflow: external diagnostics, controller creation, bounded control suggestion, training or quantum execution, evaluation, and controller update.</p>
+          <p class="caption">DUAgent API control-lifecycle matrix: user commands are mapped to public API endpoints, internal controller calls, processing logic, and output evidence.</p>
         </div>
         <div class="pipeline-grid">
           <article>
@@ -176,7 +241,7 @@
           <p class="eyebrow">Interactive browser-side demonstration</p>
           <h2>DUAgent Control Loop Demo</h2>
           <p>
-            This static GitHub Pages demo illustrates how DUAgent converts runtime diagnostics into bounded controls. You can modify the diagnostic values and immediately observe how the suggested controls, projected validation loss, safety clipping, and API-style JSON outputs change.
+            This static GitHub Pages demo illustrates how DUAgent converts runtime diagnostics into bounded controls. Visitors can modify the diagnostic values and immediately observe how the suggested controls, projected validation loss, safety clipping, and API-style JSON outputs change.
           </p>
         </div>
 
@@ -193,7 +258,7 @@
               <span class="demo-icon">⛓</span>
               <div>
                 <h3>Closed-loop API flow</h3>
-                <p id="demoCurrentDescription">The agent is initialized and ready to begin the adaptive-control loop.</p>
+                <p id="demoCurrentDescription">The agent is initialised and ready to begin the adaptive-control loop.</p>
               </div>
             </div>
 
@@ -241,7 +306,7 @@
             <span class="demo-icon">⚙</span>
             <div>
               <h3>Parameter Sandbox</h3>
-              <p>Change the diagnostics and constraints to see the controller response.</p>
+              <p>Change the diagnostics and constraints to see the controller response. This is useful for explaining the DUAgent idea to reviewers, external users, and collaborators.</p>
             </div>
           </div>
 
@@ -320,47 +385,103 @@
       <div class="container">
         <div class="section-heading">
           <h2>Main Results</h2>
-          <p>Use this section for selected plots from your classical, QFL, noisy, and IBM QPU experiments.</p>
+          <p>This section foregrounds the most useful quantitative evidence for DUAgent, combining benchmark percentages, comparative plots, and paper tables in a project-page layout.</p>
         </div>
-        <div class="result-grid">
+
+        <div class="result-grid result-grid-compact">
           <article class="result-card">
-            <span class="result-label">Classical FL</span>
-            <h3>Adaptive controls stabilise heterogeneous learning</h3>
-            <p>Show validation loss, client performance, and fixed-versus-controller-adaptive comparisons across tabular, genomic, clinical, and trajectory datasets.</p>
+            <span class="result-label">Overall</span>
+            <div class="badge-row"><span class="gain-badge positive">Best macro-F1</span><span class="gain-badge positive">Lowest final loss</span></div>
+            <h3>DUAgent outperforms fixed and heuristic control</h3>
+            <p><strong>Final macro-F1:</strong> 53.2% · <strong>Final loss:</strong> 0.484 · <strong>Loss reduction:</strong> 41.8% · <strong>Speed-up:</strong> 3.44×</p>
           </article>
           <article class="result-card">
-            <span class="result-label">QFL simulation</span>
-            <h3>Quantum-aware controls respond to noise and shot limits</h3>
-            <p>Include plots for readout, depolarising, thermal, coherent, and mixed-noise cases.</p>
+            <span class="result-label">Classical</span>
+            <div class="badge-row"><span class="gain-badge positive">+10.3 pp F1</span><span class="gain-badge positive">−50.4% final loss</span></div>
+            <h3>Largest gain appears in the classical workflow</h3>
+            <p><strong>Final macro-F1:</strong> 72.9% · <strong>Final loss:</strong> 0.304 · <strong>Loss reduction:</strong> 56.6% · <strong>Speed-up:</strong> 5.00×</p>
           </article>
           <article class="result-card">
-            <span class="result-label">IBM QPU</span>
-            <h3>Hardware execution validates practical integration</h3>
-            <p>Add real IBM quantum platform results showing trained QFL checkpoints and controller-generated quantum controls.</p>
+            <span class="result-label">QFL</span>
+            <div class="badge-row"><span class="gain-badge positive">Lower final loss</span><span class="gain-badge positive">1.89× speed-up</span></div>
+            <h3>Quantum workflow benefits from adaptive efficiency</h3>
+            <p><strong>Final macro-F1:</strong> 36.8% · <strong>Final loss:</strong> 0.634 · <strong>Loss reduction:</strong> 29.5% · <strong>Speed-up:</strong> 1.89×</p>
           </article>
         </div>
-        <div class="plot-grid" aria-label="Selected result plots">
+
+        <div class="plot-grid plot-grid-wide" aria-label="Selected result plots">
           <figure>
-            <img src="assets/plots/classical_fixed_vs_adaptive.svg" alt="Classical fixed versus adaptive validation plot" />
-            <figcaption>Classical fixed-versus-adaptive benchmark summary.</figcaption>
+            <img src="assets/plots/duagent_aggregate_relative_bar_summary.png" alt="Aggregate relative benchmark summary for DUAgent" />
+            <figcaption>Aggregate benchmark summary showing the relative performance profile of DUAgent across external-user experiments.</figcaption>
           </figure>
           <figure>
-            <img src="assets/plots/qfl_noise_controls.svg" alt="QFL noise-aware control response plot" />
-            <figcaption>QFL controller response under quantum error-family settings.</figcaption>
+            <img src="assets/plots/qfl_error_family_aggregate_relative_summary2.png" alt="QFL error-family aggregate relative summary" />
+            <figcaption>QFL error-family aggregate summary showing DUAgent behaviour across quantum noise conditions.</figcaption>
           </figure>
-          <figure>
-            <img src="assets/plots/ibm_qpu_summary.svg" alt="IBM QPU execution summary plot" />
-            <figcaption>IBM QPU execution summary and integration evidence.</figcaption>
+        </div>
+
+        <div class="downloads-panel">
+          <h3>Downloads</h3>
+          <p>Download the supporting project-page artefacts used in this result section.</p>
+          <div class="download-buttons">
+            <a class="btn" href="assets/pdfs/duagent_aggregate_relative_bar_summary.pdf" target="_blank" rel="noopener">Aggregate benchmark PDF</a>
+            <a class="btn" href="assets/pdfs/qfl_error_family_aggregate_relative_summary.pdf" target="_blank" rel="noopener">QFL noise-family PDF</a>
+            <a class="btn" href="assets/figures/api_control_lifecycle_matrix.svg" target="_blank" rel="noopener">API lifecycle SVG</a>
+            <a class="btn" href="assets/evidence/testing_coverage_table.png" target="_blank" rel="noopener">Testing evidence PNG</a>
+          </div>
+        </div>
+
+        <div class="evidence-grid">
+          <figure class="evidence-figure">
+            <img src="assets/evidence/benchmark_results_table.png" alt="Main external-user benchmark results table" />
+            <figcaption>Table-based benchmark evidence for overall, classical, and QFL workflows. The page can also provide the full PDF as a downloadable asset.</figcaption>
+            <div class="download-row">
+              <a class="btn" href="assets/pdfs/duagent_aggregate_relative_bar_summary.pdf" target="_blank" rel="noopener">Open summary PDF</a>
+            </div>
           </figure>
         </div>
       </div>
     </section>
 
+    <section class="section-pad" id="validation">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Validation and Coverage Evidence</h2>
+          <p>In addition to benchmark performance, the website can highlight software quality evidence, which is particularly useful for a systems or software-oriented research contribution.</p>
+        </div>
+
+        <div class="validation-summary-grid">
+          <article class="summary-box">
+            <h3>Automated suite</h3>
+            <p><strong>58%</strong> total line coverage over <strong>1762</strong> statements, with <strong>21 pass</strong> and <strong>3 skip</strong>.</p>
+          </article>
+          <article class="summary-box">
+            <h3>API coverage evidence</h3>
+            <p><strong>100%</strong> for <code>api/schemas</code>, <strong>100%</strong> for routes, and <strong>52%</strong> for <code>api/main</code>.</p>
+          </article>
+          <article class="summary-box">
+            <h3>Safety and orchestration</h3>
+            <p><strong>100%</strong> for <code>safety_guard</code> and <code>agent/schemas</code>, <strong>76%</strong> for <code>orchestrator</code>, and <strong>87%</strong> for <code>evaluator</code>.</p>
+          </article>
+          <article class="summary-box">
+            <h3>Quantum modules</h3>
+            <p><strong>87%</strong> for <code>quantum_wrappers</code>, <strong>54%</strong> for <code>quantum/backends</code>, and a credential-gated IBM QPU connection test noted separately.</p>
+          </article>
+        </div>
+
+        <div class="evidence-grid">
+          <figure class="evidence-figure">
+            <img src="assets/evidence/testing_coverage_table.png" alt="Automated software testing coverage and validation evidence table" />
+            <figcaption>Automated software testing, validation layers, coverage evidence, and result summary for the DUAgent implementation.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
     <section class="section-pad" id="figures">
       <div class="container">
         <div class="section-heading">
           <h2>Figures and Resources</h2>
-          <p>Place paper-ready diagrams, result plots, and screenshots here. Keep each caption short and readable.</p>
+          <p>Place paper-ready diagrams, result plots, screenshots, and downloadable supplementary assets here. Keep each caption short and readable.</p>
         </div>
         <div class="gallery-grid">
           <figure>
@@ -383,33 +504,70 @@
       <div class="container">
         <div class="section-heading">
           <h2>People and Contributions</h2>
-          <p>Edit these cards with final names, affiliations, and contribution descriptions before publication.</p>
+          <p>This tabbed section is designed for transparent academic attribution. Replace placeholders with the final author names, affiliations, and contribution descriptions before public release.</p>
         </div>
-        <div class="people-grid">
-          <article class="person-card">
-            <div class="avatar">SN</div>
+
+        <div class="people-tabs" role="tablist" aria-label="Contributor descriptions">
+          <button class="person-tab active" type="button" data-person="shanika">Shanika</button>
+          <button class="person-tab" type="button" data-person="asef">Asef</button>
+          <button class="person-tab" type="button" data-person="shiva">Shiva</button>
+          <button class="person-tab" type="button" data-person="contributors">Additional contributors</button>
+        </div>
+
+        <div class="person-detail active" data-person-panel="shanika">
+          <div class="avatar">SN</div>
+          <div>
+            <p class="role">Lead researcher · Software architect · First author</p>
             <h3>Shanika Iroshi Nanayakkara</h3>
-            <p class="role">Lead researcher and developer</p>
-            <p>Conceptualised DUAgent, implemented the FastAPI controller platform, designed benchmark workflows, prepared experiments, figures, documentation, and project website content.</p>
-          </article>
-          <article class="person-card">
-            <div class="avatar">AS</div>
+            <p>Conceptualised DeepUnfolding-Agent, designed the strategy-agnostic controller API, implemented the FastAPI software platform, prepared classical and quantum benchmark workflows, generated experimental evidence, and developed the project website.</p>
+            <ul class="contribution-list">
+              <li>Conceptualisation and system architecture</li>
+              <li>API implementation, controller workflow, and persistence design</li>
+              <li>Benchmark execution, result analysis, figures, documentation, and website preparation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="person-detail" data-person-panel="asef">
+          <div class="avatar">AS</div>
+          <div>
+            <p class="role">Supervisor / research guidance</p>
             <h3>Asef [Surname]</h3>
-            <p class="role">Supervisor / research guidance</p>
-            <p>Provided conceptual guidance, research supervision, methodological feedback, and manuscript review. Replace this text with the exact contribution statement.</p>
-          </article>
-          <article class="person-card">
-            <div class="avatar">SH</div>
+            <p>Provided doctoral supervision, methodological guidance, research-positioning feedback, and manuscript review. Replace this placeholder with the exact contribution description agreed for the paper and thesis record.</p>
+            <ul class="contribution-list">
+              <li>Research supervision and conceptual feedback</li>
+              <li>Methodological and experimental-design guidance</li>
+              <li>Manuscript review and academic positioning</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="person-detail" data-person-panel="shiva">
+          <div class="avatar">SH</div>
+          <div>
+            <p class="role">Co-supervisor / research guidance</p>
             <h3>Shiva [Surname]</h3>
-            <p class="role">Supervisor / research guidance</p>
-            <p>Provided research supervision, technical feedback, manuscript review, and academic guidance. Replace this text with the exact contribution statement.</p>
-          </article>
-          <article class="person-card">
-            <div class="avatar">CO</div>
+            <p>Provided supervisory input, technical feedback, research review, and manuscript guidance. Replace this placeholder with the exact contribution description used in the authorship statement.</p>
+            <ul class="contribution-list">
+              <li>Technical and research feedback</li>
+              <li>Review of system framing, experiments, and presentation</li>
+              <li>Manuscript and thesis-related guidance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="person-detail" data-person-panel="contributors">
+          <div class="avatar">CO</div>
+          <div>
+            <p class="role">Collaboration, testing, and review</p>
             <h3>Additional contributors</h3>
-            <p class="role">Collaboration and review</p>
-            <p>Add co-authors, software testers, dataset contributors, institutional collaborators, and acknowledgement-only contributors as appropriate.</p>
-          </article>
+            <p>Add co-authors, dataset contributors, software testers, institutional collaborators, and acknowledgement-only contributors here. This keeps scientific credit visible without overloading the main hero section.</p>
+            <ul class="contribution-list">
+              <li>Software testing and validation feedback</li>
+              <li>Dataset preparation, review, or domain feedback</li>
+              <li>Paper review, project discussion, or implementation support</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
