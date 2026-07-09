@@ -1211,3 +1211,48 @@ body.classical-demo .quantum-only {
     padding: 10px;
   }
 }
+.people-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.person-tab {
+  border: 1px solid rgba(17, 97, 73, 0.25);
+  background: #ffffff;
+  color: var(--forest);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.person-tab.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--forest), var(--emerald));
+  border-color: transparent;
+}
+
+.person-detail {
+  display: none;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.person-detail.active {
+  display: block;
+}
+
+.contribution-list {
+  margin: 14px 0 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.contribution-list li {
+  margin: 7px 0;
+}
