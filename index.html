@@ -23,9 +23,9 @@
         <a href="#abstract">Abstract</a>
         <a href="#contributions">Contributions</a>
         <a href="#pipeline">Pipeline</a>
+        <a href="#demo">Interactive Demo</a>
         <a href="#results">Results</a>
         <a href="#figures">Figures</a>
-        <a href="#demo">Interactive Demo</a>
         <a href="#people">People</a>
         <a href="#citation">Citation</a>
       </div>
@@ -52,6 +52,7 @@
             <a class="btn primary" href="https://github.com/shanikairoshi/DeepUnfolding-Agent" target="_blank" rel="noopener">GitHub</a>
             <a class="btn" href="#citation">Citation</a>
             <a class="btn" href="#results">Results</a>
+            <a class="btn" href="#demo">Interactive Demo</a>
             <a class="btn" href="#people">Contributors</a>
           </div>
         </div>
@@ -95,7 +96,7 @@
       <div class="container narrow">
         <h2>Latest News</h2>
         <ul class="timeline">
-          <li><time datetime="2026-07">July 2026</time><span>Project website updated with DUAgent architecture, benchmark results, plots, and contributor descriptions.</span></li>
+          <li><time datetime="2026-07">July 2026</time><span>Project website updated with DUAgent architecture, benchmark results, plots, contributor descriptions, and an interactive browser-side API demo.</span></li>
           <li><time datetime="2026-01">January 2026</time><span>DeepUnfolding-Agent GitHub repository created for public research dissemination.</span></li>
           <li><time datetime="2026">2026</time><span>External-user benchmark scripts prepared for classical FL, QFL, hybrid workflows, noisy simulation, and IBM QPU execution.</span></li>
         </ul>
@@ -106,7 +107,7 @@
       <div class="container narrow">
         <h2>Abstract</h2>
         <p>
-          Adaptive controllers for classical, quantum, and hybrid optimization workflows are often implemented as task-specific code coupled to a particular dataset, model, or training loop. This limits reproducibility, reuse, and comparison across learning strategies.
+          Adaptive controllers for classical, quantum, and hybrid optimisation workflows are often implemented as task-specific code coupled to a particular dataset, model, or training loop. This limits reproducibility, reuse, and comparison across learning strategies.
         </p>
         <p>
           DeepUnfolding-Agent addresses this limitation by exposing deep-unfolded adaptive control through a schema-based FastAPI interface. External systems provide runtime diagnostic variables and receive bounded control variables, enabling reusable controller integration across federated learning, quantum federated learning, and hybrid optimisation settings.
@@ -144,7 +145,7 @@
           <p>A website section for your main architecture, API loop, quantum workflow, and benchmark workflow figures.</p>
         </div>
         <div class="image-panel">
-          <img src="assets/figures/api_control_lifecycle_matrix.svg" alt="DUAgent closed-loop adaptive-control pipeline" />
+          <img src="assets/figures/duagent_pipeline.svg" alt="DUAgent closed-loop adaptive-control pipeline" />
           <p class="caption">DUAgent closed-loop workflow: external diagnostics, controller creation, bounded control suggestion, training or quantum execution, evaluation, and controller update.</p>
         </div>
         <div class="pipeline-grid">
@@ -165,6 +166,153 @@
             <p>Evaluate the resulting round, update the controller, and save metadata/checkpoints for reproducible reuse.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+
+    <section class="section-pad demo-section" id="demo">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Interactive browser-side demonstration</p>
+          <h2>DUAgent Control Loop Demo</h2>
+          <p>
+            This static GitHub Pages demo illustrates how DUAgent converts runtime diagnostics into bounded controls. Visitors can modify the diagnostic values and immediately observe how the suggested controls, projected validation loss, safety clipping, and API-style JSON outputs change.
+          </p>
+        </div>
+
+        <div class="demo-toolbar" aria-label="Demo controls">
+          <button class="btn primary" id="demoStart" type="button">▶ Start Demo</button>
+          <button class="btn" id="demoNext" type="button">Next Step →</button>
+          <button class="btn" id="demoReset" type="button">↻ Reset</button>
+          <span class="demo-note">Illustrative simulation only; no backend request is sent from GitHub Pages.</span>
+        </div>
+
+        <div class="demo-grid">
+          <section class="demo-panel demo-flow-panel" aria-label="DUAgent closed-loop flow visualisation">
+            <div class="demo-panel-header">
+              <span class="demo-icon">⛓</span>
+              <div>
+                <h3>Closed-loop API flow</h3>
+                <p id="demoCurrentDescription">The agent is initialised and ready to begin the adaptive-control loop.</p>
+              </div>
+            </div>
+
+            <div class="demo-flow" id="demoFlow">
+              <article class="demo-node" data-demo-step="0"><span>01</span><strong>User goal</strong><em>objective + constraints</em></article>
+              <article class="demo-node" data-demo-step="1"><span>02</span><strong>Strategy schema</strong><em>diagnostics + bounds</em></article>
+              <article class="demo-node" data-demo-step="2"><span>03</span><strong>Controller</strong><em>create instance</em></article>
+              <article class="demo-node" data-demo-step="3"><span>04</span><strong>Suggest controls</strong><em>map state to action</em></article>
+              <article class="demo-node" data-demo-step="4"><span>05</span><strong>Safety guard</strong><em>clip to limits</em></article>
+              <article class="demo-node" data-demo-step="5"><span>06</span><strong>Executor</strong><em>controlled round</em></article>
+              <article class="demo-node" data-demo-step="6"><span>07</span><strong>Update</strong><em>feedback learning</em></article>
+              <article class="demo-node" data-demo-step="7"><span>08</span><strong>Evaluate</strong><em>continue or stop</em></article>
+            </div>
+          </section>
+
+          <section class="demo-panel demo-inspector" aria-label="Interactive API inspector">
+            <div class="demo-panel-header compact">
+              <span class="demo-icon">‹›</span>
+              <div>
+                <h3>API Inspector</h3>
+                <p id="demoStepTitle">Submit autonomous goal</p>
+              </div>
+            </div>
+
+            <div class="demo-endpoint-line">
+              <span class="demo-method" id="demoMethod">POST</span>
+              <span class="demo-endpoint" id="demoEndpoint">/agent/run-autonomous-experiment</span>
+            </div>
+
+            <div class="demo-json-grid">
+              <div>
+                <div class="json-title">Request</div>
+                <pre class="demo-code"><code id="demoRequestJson"></code></pre>
+              </div>
+              <div>
+                <div class="json-title">Response</div>
+                <pre class="demo-code"><code id="demoResponseJson"></code></pre>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="demo-panel demo-sandbox" aria-label="Parameter sandbox">
+          <div class="demo-panel-header">
+            <span class="demo-icon">⚙</span>
+            <div>
+              <h3>Parameter Sandbox</h3>
+              <p>Change the diagnostics and constraints to see the controller response. This is useful for explaining the DUAgent idea to reviewers, external users, and collaborators.</p>
+            </div>
+          </div>
+
+          <div class="sandbox-grid">
+            <div class="sandbox-controls">
+              <label class="control-field select-field">
+                <span>Workflow</span>
+                <select id="demoWorkflow">
+                  <option value="quantum">Quantum QFL</option>
+                  <option value="classical">Classical FedProx</option>
+                </select>
+              </label>
+
+              <label class="control-field">
+                <span>Previous validation loss <strong id="lossValue">0.800</strong></span>
+                <input id="previousLoss" type="range" min="0.20" max="1.20" step="0.01" value="0.80" />
+              </label>
+
+              <label class="control-field">
+                <span>Gradient / quantum-gradient norm <strong id="gradValue">0.40</strong></span>
+                <input id="gradientNorm" type="range" min="0.00" max="1.00" step="0.01" value="0.40" />
+              </label>
+
+              <label class="control-field quantum-only">
+                <span>Shot-noise level <strong id="noiseValue">0.05</strong></span>
+                <input id="shotNoise" type="range" min="0.00" max="0.50" step="0.01" value="0.05" />
+              </label>
+
+              <label class="control-field">
+                <span>Circuit depth / local epochs <strong id="depthValue">2</strong></span>
+                <input id="circuitDepth" type="range" min="1" max="12" step="1" value="2" />
+              </label>
+
+              <label class="control-field quantum-only">
+                <span>Maximum allowed shots <strong id="maxShotsValue">4096</strong></span>
+                <input id="maxShots" type="range" min="512" max="8192" step="128" value="4096" />
+              </label>
+
+              <label class="control-field">
+                <span>Target validation loss <strong id="targetValue">0.400</strong></span>
+                <input id="targetLoss" type="range" min="0.20" max="0.90" step="0.01" value="0.40" />
+              </label>
+            </div>
+
+            <div class="sandbox-output">
+              <div class="output-grid">
+                <article class="output-card"><span id="primaryControlLabel">θ learning rate</span><strong id="primaryControlValue">0.0000</strong></article>
+                <article class="output-card"><span id="resourceLabel">Shots</span><strong id="resourceValue">0</strong></article>
+                <article class="output-card"><span id="depthLabel">Circuit depth</span><strong id="safeDepthValue">0</strong></article>
+                <article class="output-card"><span>Projected loss</span><strong id="projectedLossValue">0.000</strong></article>
+              </div>
+
+              <div class="loss-bars" aria-label="Loss comparison">
+                <div class="loss-row">
+                  <span>Current loss</span>
+                  <div class="loss-track"><div class="loss-bar current" id="currentLossBar"></div></div>
+                  <strong id="currentLossText">0.800</strong>
+                </div>
+                <div class="loss-row">
+                  <span>Projected loss</span>
+                  <div class="loss-track"><div class="loss-bar projected" id="projectedLossBar"></div></div>
+                  <strong id="projectedLossText">0.649</strong>
+                </div>
+              </div>
+
+              <div class="interpretation-box" id="sandboxInterpretation">
+                Increase shot noise or gradient norm to see DUAgent allocate more conservative controls and more quantum measurement resources under the user-defined safety bound.
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -242,16 +390,26 @@
             <div class="avatar">SN</div>
             <h3>Shanika Iroshi Nanayakkara</h3>
             <p class="role">Lead researcher and developer</p>
-            <p> Conceptualized DUAgent, implemented the FastAPI controller platform, designed benchmark workflows, and prepared experiments, figures, documentation, and project website content.</p>
+            <p>Conceptualised DUAgent, implemented the FastAPI controller platform, designed benchmark workflows, prepared experiments, figures, documentation, and project website content.</p>
           </article>
-  
+          <article class="person-card">
+            <div class="avatar">AS</div>
+            <h3>Asef [Surname]</h3>
+            <p class="role">Supervisor / research guidance</p>
+            <p>Provided conceptual guidance, research supervision, methodological feedback, and manuscript review. Replace this text with the exact contribution statement.</p>
+          </article>
           <article class="person-card">
             <div class="avatar">SH</div>
-            <h3>Shiva Raj Pokhrel</h3>
+            <h3>Shiva [Surname]</h3>
             <p class="role">Supervisor / research guidance</p>
             <p>Provided research supervision, technical feedback, manuscript review, and academic guidance. Replace this text with the exact contribution statement.</p>
           </article>
-          
+          <article class="person-card">
+            <div class="avatar">CO</div>
+            <h3>Additional contributors</h3>
+            <p class="role">Collaboration and review</p>
+            <p>Add co-authors, software testers, dataset contributors, institutional collaborators, and acknowledgement-only contributors as appropriate.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -262,7 +420,7 @@
         <p>If you use DeepUnfolding-Agent in research, please cite the associated paper and software repository.</p>
         <pre class="bibtex"><code>@software{duagent2026,
   title  = {DeepUnfolding-Agent: A Strategy-Agnostic API for Deep-Unfolded Adaptive Control},
-  author = {Nanayakkara, Shanika Iroshi, Shiva Raj Pokhrel},
+  author = {Nanayakkara, Shanika Iroshi},
   year   = {2026},
   url    = {https://github.com/shanikairoshi/DeepUnfolding-Agent}
 }</code></pre>
