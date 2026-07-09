@@ -1256,3 +1256,13 @@ body.classical-demo .quantum-only {
 .contribution-list li {
   margin: 7px 0;
 }
+.btn.disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+  color: #6f8078;
+  background: #eef5f1;
+  border-color: rgba(17, 97, 73, 0.15);
+}
