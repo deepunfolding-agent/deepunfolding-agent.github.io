@@ -346,3 +346,19 @@ if ($('demoStart')) {
 
   renderDemo();
 }
+
+// Contributor tab controls.
+const personTabs = document.querySelectorAll('[data-person]');
+const personPanels = document.querySelectorAll('[data-person-panel]');
+
+if (personTabs.length && personPanels.length) {
+  personTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const selected = tab.dataset.person;
+      personTabs.forEach((item) => item.classList.toggle('active', item === tab));
+      personPanels.forEach((panel) => {
+        panel.classList.toggle('active', panel.dataset.personPanel === selected);
+      });
+    });
+  });
+}
