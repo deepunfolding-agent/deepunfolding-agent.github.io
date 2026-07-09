@@ -1164,3 +1164,50 @@ body.classical-demo .quantum-only {
     width: 100%;
   }
 }
+
+
+/* Fix: wide result plots should not be clipped inside two-column cards. */
+.results-container {
+  width: min(1380px, calc(100% - 40px));
+}
+
+.plot-grid-wide {
+  grid-template-columns: 1fr !important;
+  gap: 32px;
+}
+
+.plot-grid-wide figure {
+  overflow: hidden;
+  padding: 18px;
+}
+
+.plot-image-link {
+  display: block;
+}
+
+.plot-grid-wide img {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  padding: 0;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.plot-grid-wide figcaption {
+  padding: 18px 6px 4px;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 640px) {
+  .results-container {
+    width: min(100% - 26px, 1120px);
+  }
+
+  .plot-grid-wide figure {
+    padding: 10px;
+  }
+}
