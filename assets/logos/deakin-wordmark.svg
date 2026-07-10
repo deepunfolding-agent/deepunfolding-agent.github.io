@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="96" viewBox="0 0 640 96" role="img" aria-label="Deakin University wordmark placeholder">
+  <rect width="640" height="96" fill="none"/>
+  <g transform="translate(8,8)">
+    <circle cx="40" cy="40" r="36" fill="#0b3d2e"/>
+    <path d="M25 25h20c14 0 24 9 24 22 0 14-10 24-25 24H25V25zm17 32h3c5 0 8-4 8-10s-3-9-8-9h-3v19z" fill="#ffffff"/>
+    <text x="92" y="43" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="800" fill="#0b3d2e" letter-spacing="-.8">Deakin University</text>
+    <text x="94" y="69" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="#116149">School of Information Technology</text>
+  </g>
+</svg>
