@@ -1266,3 +1266,199 @@ body.classical-demo .quantum-only {
   background: #eef5f1;
   border-color: rgba(17, 97, 73, 0.15);
 }
+/* Clean academic hero inspired by project-page style */
+.hero-clean {
+  min-height: 92vh;
+  padding: 0 0 72px;
+  background:
+    radial-gradient(circle at 12% 25%, rgba(23, 143, 99, 0.14), transparent 30%),
+    radial-gradient(circle at 88% 18%, rgba(183, 220, 198, 0.58), transparent 34%),
+    linear-gradient(135deg, #f6fffa 0%, #eaf7f0 48%, #eef6ff 100%);
+  border-bottom: 1px solid var(--line);
+}
+
+.institution-strip {
+  width: 100%;
+  padding: 22px 0;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(17, 97, 73, 0.14);
+  backdrop-filter: blur(14px);
+}
+
+.institution-inner {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  text-align: left;
+}
+
+.institution-inner img {
+  max-height: 54px;
+  width: auto;
+}
+
+.institution-text {
+  display: grid;
+  gap: 2px;
+  color: var(--forest);
+}
+
+.institution-text strong {
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.institution-text span {
+  color: #47665b;
+  font-size: 0.96rem;
+  font-weight: 650;
+}
+
+.hero-clean-inner {
+  padding-top: 68px;
+  text-align: center;
+}
+
+.hero-paper-title {
+  max-width: 1060px;
+  margin: 0 auto 26px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.45rem);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+  color: #1f2f29;
+}
+
+.hero-project-title {
+  margin: 0 auto;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(4.4rem, 12vw, 8.4rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.075em;
+  background: linear-gradient(135deg, var(--forest), var(--emerald), #4ade80);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-subtitle-main {
+  margin: 34px 0 24px;
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  color: #394d46;
+  letter-spacing: -0.03em;
+}
+
+.hero-description {
+  max-width: 760px;
+  margin: 0 auto 34px;
+  color: #53685f;
+  font-size: 1.13rem;
+  line-height: 1.75;
+}
+
+.hero-author-line {
+  max-width: 900px;
+  margin: 0 auto 24px;
+  color: #263a33;
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.hero-author-line sup,
+.hero-affiliation-card sup {
+  color: var(--emerald);
+  font-weight: 900;
+}
+
+.hero-affiliation-card {
+  width: min(760px, 100%);
+  margin: 0 auto 28px;
+  padding: 22px;
+  color: #64756e;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(17, 97, 73, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 14px 36px rgba(10, 55, 38, 0.09);
+}
+
+.hero-affiliation-card p {
+  margin: 4px 0;
+}
+
+.hero-main-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 152px;
+  min-height: 58px;
+  padding: 0 28px;
+  border-radius: 999px;
+  border: 2px solid var(--emerald);
+  background: #ffffff;
+  color: var(--emerald);
+  font-weight: 900;
+  box-shadow: 0 14px 30px rgba(10, 55, 38, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(10, 55, 38, 0.18);
+}
+
+.hero-btn.primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--forest), var(--emerald));
+  border-color: transparent;
+}
+
+.hero-btn.disabled,
+.hero-btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+  color: #6f8078;
+  background: #eef5f1;
+  border-color: rgba(17, 97, 73, 0.15);
+}
+
+@media (max-width: 760px) {
+  .institution-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .institution-inner img {
+    max-height: 46px;
+  }
+
+  .hero-clean-inner {
+    padding-top: 44px;
+  }
+
+  .hero-project-title {
+    font-size: clamp(3.3rem, 18vw, 5rem);
+  }
+
+  .hero-main-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-btn {
+    width: 100%;
+  }
+}
